@@ -1,0 +1,814 @@
+#!gfx:interface/country/central_europe/POL/PRG_focus.gfx
+focus_tree = {
+	id = PRG
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = PRG
+		}
+	}
+	default = no
+	
+	focus = {
+		id = PRG_the_regency_council_converges
+		icon = GFX_focus_PRG_the_regency_council_converges
+		x = 15
+		y = 0
+		cost = 5
+		completion_reward = {
+			add_political_power = 25
+			add_stability = 0.05
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = PRG_repair_plock_town_market
+		icon = GFX_focus_PRG_repair_plock_town_market
+		x = 5
+		y = 1
+		cost = 5
+		prerequisite = { focus = PRG_the_regency_council_converges }
+		completion_reward = {
+			98 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRG_improve_northern_roads
+		icon = GFX_focus_PRG_improve_northern_roads
+		x = 0
+		y = 1
+		cost = 6
+		relative_position_id = PRG_repair_plock_town_market
+		prerequisite = { focus = PRG_repair_plock_town_market }
+		completion_reward = {
+			5 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			847 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRG_invest_in_vistula_fishing_industry
+		icon = GFX_focus_PRG_invest_in_vistula_fishing_industry
+		x = -1
+		y = 1
+		cost = 9
+		relative_position_id = PRG_improve_northern_roads
+		prerequisite = { focus = PRG_improve_northern_roads }
+		completion_reward = {
+			98 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			847 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRG_construct_the_torun_arsenal
+		icon = GFX_focus_PRG_construct_the_torun_arsenal
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = PRG_improve_northern_roads
+		prerequisite = { focus = PRG_improve_northern_roads }
+		completion_reward = {
+			847 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRG_battle_illiteracy
+		icon = GFX_focus_PRG_battle_illiteracy
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = PRG_invest_in_vistula_fishing_industry
+		prerequisite = { focus = PRG_invest_in_vistula_fishing_industry }
+		prerequisite = { focus = PRG_construct_the_torun_arsenal }
+		completion_reward = {
+			add_ideas = {
+				HUN_new_schools
+			}
+		}
+	}
+	focus = {
+		id = PRG_create_the_royal_army
+		icon = GFX_focus_PRG_create_the_royal_army
+		x = 9
+		y = 1
+		cost = 5
+		prerequisite = { focus = PRG_the_regency_council_converges }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PRG_a_poor_army
+				add_idea = PRG_the_royal_army
+			}
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = PRG_conscription_campaigns
+		icon = GFX_focus_PRG_conscription_campaigns
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = PRG_create_the_royal_army
+		prerequisite = { focus = PRG_create_the_royal_army }
+		completion_reward = {
+			add_manpower = 5000
+			swap_ideas = {
+				remove_idea = PRG_the_royal_army
+				add_idea = PRG_the_royal_army2
+			}
+			swap_ideas = {
+				remove_idea = limited_conscription
+				add_idea = extensive_conscription
+			}
+		}
+	}
+	focus = {
+		id = PRG_recover_belorussian_weapons
+		icon = GFX_focus_PRG_recover_belorussian_weapons
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = PRG_conscription_campaigns
+		prerequisite = { focus = PRG_conscription_campaigns }
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1200
+				producer = BLR
+			}
+			add_tech_bonus = {
+				name = PRG_recover_belorussian_weapons
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+	focus = {
+		id = PRG_training_in_masuria
+		icon = GFX_focus_PRG_training_in_masuria
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = PRG_conscription_campaigns
+		prerequisite = { focus = PRG_conscription_campaigns }
+		completion_reward = {
+			add_war_support = 0.05
+            add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.4
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+	focus = {
+		id = PRG_ready_your_highness
+		icon = GFX_focus_PRG_ready_your_highness
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = PRG_recover_belorussian_weapons
+		prerequisite = { focus = PRG_recover_belorussian_weapons }
+		prerequisite = { focus = PRG_training_in_masuria }
+		completion_reward = {
+			add_command_power = 15
+			swap_ideas = {
+				remove_idea = PRG_the_royal_army2
+				add_idea = PRG_the_royal_army3
+			}
+		}
+	}
+	focus = {
+		id = PRG_commonwealth_investment_bureau
+		icon = GFX_focus_PRG_commonwealth_investment_bureau
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = PRG_repair_plock_town_market
+		prerequisite = { focus = PRG_repair_plock_town_market }
+		prerequisite = { focus = PRG_create_the_royal_army }
+		completion_reward = {
+			add_political_power = 25
+			add_ideas = {
+				PRG_szlachta_state_investment_schemes
+			}
+		}
+	}
+	focus = {
+		id = PRG_expand_research_capabilities
+		icon = GFX_focus_PRG_expand_research_capabilities
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = PRG_commonwealth_investment_bureau
+		prerequisite = { focus = PRG_commonwealth_investment_bureau }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PRG_szlachta_state_investment_schemes
+				add_idea = PRG_szlachta_state_investment_schemes2
+			}
+		}
+	}
+	focus = {
+		id = PRG_warsaw_university
+		icon = GFX_focus_PRG_warsaw_university
+		x = 0
+		y = 1
+		cost = 5
+		available = { owns_state = 10 }
+		relative_position_id = PRG_expand_research_capabilities
+		prerequisite = { focus = PRG_expand_research_capabilities }
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	focus = {
+		id = PRG_elect_a_king
+		icon = GFX_focus_PRG_elect_a_king
+		x = 0
+		y = 1
+		cost = 5
+		available = { has_completed_focus = PRG_a_poland_reunified }
+		relative_position_id = PRG_the_regency_council_converges
+		prerequisite = { focus = PRG_the_regency_council_converges }
+		completion_reward = {
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = PRG_potocki
+				name = PRG_potocki_long
+			}
+			set_party_name = {
+				ideology = despotism
+				long_name = PRG_radziwill
+				name = PRG_radziwill_long
+			}
+			remove_ideas = {
+				PRG_an_empty_throne
+			}
+			country_event = prg.1
+			set_cosmetic_tag = PRG_kingdom
+		}
+	}
+	focus = {
+		id = PRG_house_of_radziwill
+		icon = GFX_focus_PRG_house_of_radziwill
+		x = -2
+		y = 1
+		cost = 0
+		available = { always = no }
+		relative_position_id = PRG_elect_a_king
+		prerequisite = { focus = PRG_elect_a_king }
+		mutually_exclusive = { focus = PRG_house_of_potocki }
+		completion_reward = {
+			add_stability = 0.04
+			add_country_leader_role = {
+				character = PRG_janusz_radziwill
+				promote_leader = yes
+    			country_leader = {
+        			ideology = absolute_monarchy
+    			}
+			}
+		}
+	}
+	focus = {
+		id = PRG_the_lithuanian_heritage
+		icon = GFX_focus_PRG_the_lithuanian_heritage
+		x = 0
+		y = 1
+		cost = 3
+		relative_position_id = PRG_house_of_radziwill
+		prerequisite = { focus = PRG_house_of_radziwill }
+		completion_reward = {
+			custom_effect_tooltip = PRG_lithuanian_tt
+			BLR = { make_every_core_national_for_PREV = yes }
+			EPR = { make_every_core_national_for_PREV = yes }
+			EST = { make_every_core_national_for_PREV = yes }
+			LAT = { make_every_core_national_for_PREV = yes }
+			LIT = { make_every_core_national_for_PREV = yes }
+			add_state_core = 93
+			add_state_core = 193
+			add_state_core = 198
+			add_state_core = 199
+			add_state_core = 201
+			add_state_core = 202
+			add_state_core = 203
+			add_state_core = 259
+			add_state_core = 1235
+			add_war_support = 0.1
+		}
+	}
+	focus = {
+		id = PRG_end_the_red_napoleons_reign
+		icon = GFX_focus_PRG_end_the_red_napoleons_reign
+		x = -1
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		relative_position_id = PRG_the_lithuanian_heritage
+		prerequisite = { focus = PRG_the_lithuanian_heritage }
+		completion_reward = {
+			declare_war_on = {
+				target = BLR
+				type = civil_war
+			}
+			hidden_effect = {
+				add_civil_war_target = BLR
+			}
+		}
+	}
+	focus = {
+		id = PRG_demand_lithuanian_possessions
+		icon = GFX_focus_PRG_demand_lithuanian_possessions
+		x = 1
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		relative_position_id = PRG_the_lithuanian_heritage
+		prerequisite = { focus = PRG_the_lithuanian_heritage }
+		completion_reward = {
+			every_country = {
+				limit = {
+					is_baltic_tag = yes
+				}
+				PRG = {
+					declare_war_on = {
+						target = PREV
+						type = civil_war
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRG_reclaim_kiev
+		icon = GFX_focus_PRG_reclaim_kiev
+		x = 1
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		relative_position_id = PRG_end_the_red_napoleons_reign
+		prerequisite = { focus = PRG_end_the_red_napoleons_reign }
+		prerequisite = { focus = PRG_demand_lithuanian_possessions }
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					exists = yes
+					OR = {
+						owns_state = 193
+						owns_state = 198
+						owns_state = 199
+						owns_state = 201
+						owns_state = 202
+						owns_state = 203
+						owns_state = 259
+					}
+				}
+				PRG = {
+					create_wargoal = {
+						target = PREV
+						type = civil_war
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRG_restore_the_commonwealth
+		icon = GFX_focus_PRG_restore_the_commonwealth
+		x = 0
+		y = 1
+		cost = 4
+		available = { has_war = no }
+		relative_position_id = PRG_reclaim_kiev
+		prerequisite = { focus = PRG_reclaim_kiev }
+		completion_reward = {
+			set_cosmetic_tag = PRG_commonwealth
+			every_country = {
+				limit = {
+					is_russian_tag = yes
+				}
+				PRG = {
+					create_wargoal = {
+						target = PREV
+						type = puppet_wargoal_focus
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRG_house_of_potocki
+		icon = GFX_focus_PRG_house_of_potocki
+		x = 2
+		y = 1
+		cost = 0
+		available = { always = no }
+		relative_position_id = PRG_elect_a_king
+		prerequisite = { focus = PRG_elect_a_king }
+		mutually_exclusive = { focus = PRG_house_of_radziwill }
+		completion_reward = {
+			add_political_power = 25
+			set_politics = {
+				ruling_party = authoritarian_democrat
+			}
+			add_country_leader_role = {
+				character = PRG_jerzy_jozef_potocki
+				promote_leader = yes
+    			country_leader = {
+        			ideology = elective_monarchy
+    			}
+			}
+		}
+	}
+	focus = {
+		id = PRG_a_galician_legacy
+		icon = GFX_focus_PRG_a_galician_legacy
+		x = 0
+		y = 1
+		cost = 3
+		relative_position_id = PRG_house_of_potocki
+		prerequisite = { focus = PRG_house_of_potocki }
+		completion_reward = {
+			custom_effect_tooltip = PRG_galician_tt
+			CZE = { make_every_core_national_for_PREV = yes }
+			HUN = { make_every_core_national_for_PREV = yes }
+			SLO = { make_every_core_national_for_PREV = yes }
+			add_war_support = 0.1
+		}
+	}
+	focus = {
+		id = PRG_demand_schwarzenbergs_submission
+		icon = GFX_focus_PRG_demand_schwarzenbergs_submission
+		x = -1
+		y = 1
+		cost = 5
+		available = {
+			has_war = no
+			CZE = {
+				has_completed_focus = CZE_proceed_with_the_coronation
+			}
+		}
+		relative_position_id = PRG_a_galician_legacy
+		prerequisite = { focus = PRG_a_galician_legacy }
+		mutually_exclusive = { focus = PRG_crush_the_czechoslovak_dream }
+		completion_reward = {
+			CZE = {
+				country_event = prg.2
+			}
+		}
+	}
+	focus = {
+		id = PRG_crush_the_czechoslovak_dream
+		icon = GFX_focus_PRG_crush_the_czechoslovak_dream
+		x = 1
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		relative_position_id = PRG_a_galician_legacy
+		prerequisite = { focus = PRG_a_galician_legacy }
+		mutually_exclusive = { focus = PRG_demand_schwarzenbergs_submission }
+		completion_reward = {
+			declare_war_on = {
+				target = CZE
+				type = civil_war
+			}
+			hidden_effect = {
+				add_civil_war_target = CZE
+			}
+		}
+	}
+	focus = {
+		id = PRG_liberate_our_hungarian_brothers
+		icon = GFX_focus_PRG_liberate_our_hungarian_brothers
+		x = 1
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		relative_position_id = PRG_demand_schwarzenbergs_submission
+		prerequisite = { focus = PRG_demand_schwarzenbergs_submission focus = PRG_crush_the_czechoslovak_dream }
+		completion_reward = {
+			declare_war_on = {
+				target = HUN
+				type = civil_war
+			}
+			hidden_effect = {
+				add_civil_war_target = HUN
+			}
+		}
+	}
+	focus = {
+		id = PRG_declare_a_polish_empire
+		icon = GFX_focus_PRG_declare_a_polish_empire
+		x = 0
+		y = 1
+		cost = 4
+		available = { has_war = no }
+		relative_position_id = PRG_liberate_our_hungarian_brothers
+		prerequisite = { focus = PRG_liberate_our_hungarian_brothers }
+		completion_reward = {
+			set_cosmetic_tag = PRG_empire
+			every_country = {
+				limit = {
+					is_german_tag = yes
+				}
+				PRG = {
+					create_wargoal = {
+						target = PREV
+						type = puppet_wargoal_focus
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRG_a_plan_to_save_poland
+		icon = GFX_focus_PRG_a_plan_to_save_poland
+		x = 7
+		y = 1
+		cost = 5
+		available = { has_completed_focus = PRG_ready_your_highness }
+		relative_position_id = PRG_the_regency_council_converges
+		prerequisite = { focus = PRG_the_regency_council_converges }
+		completion_reward = {
+			add_war_support = 0.1
+			POL = {
+				every_core_state = {
+					add_claim_by = PRG
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRG_invade_east_prussia
+		icon = GFX_focus_PRG_invade_east_prussia
+		x = -2
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		bypass = { NOT = { country_exists = EPR } }
+		bypass_effect = {
+			add_state_core = 763
+		}
+		relative_position_id = PRG_a_plan_to_save_poland
+		prerequisite = { focus = PRG_a_plan_to_save_poland }
+		completion_reward = {
+			add_state_core = 763
+			declare_war_on = {
+				target = EPR
+				type = civil_war
+			}
+			add_civil_war_target = EPR
+		}
+	}
+	focus = {
+		id = PRG_step_into_gdansk
+		icon = GFX_focus_PRG_step_into_gdansk
+		x = 0
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		relative_position_id = PRG_invade_east_prussia
+		prerequisite = { focus = PRG_invade_east_prussia }
+		completion_reward = {
+			declare_war_on = {
+				target = DNZ
+				type = civil_war
+			}
+			declare_war_on = {
+				target = KSH
+				type = civil_war
+			}
+			add_civil_war_target = DNZ
+			add_civil_war_target = KSH
+		}
+	}
+	focus = {
+		id = PRG_strike_the_republicans
+		icon = GFX_focus_PRG_strike_the_republicans
+		x = 2
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		bypass = { NOT = { country_exists = POL } }
+		relative_position_id = PRG_a_plan_to_save_poland
+		prerequisite = { focus = PRG_a_plan_to_save_poland }
+		completion_reward = {
+			declare_war_on = {
+				target = POL
+				type = civil_war
+			}
+			add_civil_war_target = POL
+		}
+	}
+	focus = {
+		id = PRG_move_into_the_belweder
+		icon = GFX_focus_PRG_move_into_the_belweder
+		x = 0
+		y = 1
+		cost = 2
+		available = { has_war = no owns_state = 10 }
+		relative_position_id = PRG_a_plan_to_save_poland
+		prerequisite = { focus = PRG_a_plan_to_save_poland }
+		completion_reward = {
+			add_war_support = 0.05
+			set_capital = {
+				state = 10
+				remember_old_capital = no
+			}
+		}
+	}
+	focus = {
+		id = PRG_kick_out_the_communists
+		icon = GFX_focus_PRG_kick_out_the_communists
+		x = -1
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		bypass = { NOT = { country_exists = PLF } }
+		relative_position_id = PRG_strike_the_republicans
+		prerequisite = { focus = PRG_strike_the_republicans }
+		completion_reward = {
+			declare_war_on = {
+				target = PLF
+				type = civil_war
+			}
+			add_civil_war_target = PLF
+		}
+	}
+	focus = {
+		id = PRG_end_the_nationalists
+		icon = GFX_focus_PRG_end_the_nationalists
+		x = 1
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		bypass = { NOT = { country_exists = LUB country_exists = ORD } }
+		relative_position_id = PRG_strike_the_republicans
+		prerequisite = { focus = PRG_strike_the_republicans }
+		completion_reward = {
+			declare_war_on = {
+				target = LUB
+				type = civil_war
+			}
+			declare_war_on = {
+				target = ORD
+				type = civil_war
+			}
+			add_civil_war_target = LUB
+			add_civil_war_target = ORD
+		}
+	}
+	focus = {
+		id = PRG_secure_poznan
+		icon = GFX_focus_PRG_secure_poznan
+		x = -1
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		bypass = { NOT = { country_exists = POZ country_exists = WKP } }
+		relative_position_id = PRG_kick_out_the_communists
+		prerequisite = { focus = PRG_kick_out_the_communists }
+		prerequisite = { focus = PRG_end_the_nationalists }
+		completion_reward = {
+			declare_war_on = {
+				target = POZ
+				type = civil_war
+			}
+			declare_war_on = {
+				target = WKP
+				type = civil_war
+			}
+			add_civil_war_target = POZ
+			add_civil_war_target = WKP
+		}
+	}
+	focus = {
+		id = PRG_enter_the_southern_garrison
+		icon = GFX_focus_PRG_enter_the_southern_garrison
+		x = 1
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		bypass = { NOT = { country_exists = HJK country_exists = KRK } }
+		relative_position_id = PRG_kick_out_the_communists
+		prerequisite = { focus = PRG_kick_out_the_communists }
+		prerequisite = { focus = PRG_end_the_nationalists }
+		completion_reward = {
+			declare_war_on = {
+				target = HJK
+				type = civil_war
+			}
+			declare_war_on = {
+				target = KRK
+				type = civil_war
+			}
+			add_civil_war_target = HJK
+			add_civil_war_target = KRK
+		}
+	}
+	focus = {
+		id = PRG_pacify_the_kresy
+		icon = GFX_focus_PRG_pacify_the_kresy
+		x = 1
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		bypass = { NOT = { country_exists = BLY country_exists = JBR } }
+		relative_position_id = PRG_end_the_nationalists
+		prerequisite = { focus = PRG_kick_out_the_communists }
+		prerequisite = { focus = PRG_end_the_nationalists }
+		completion_reward = {
+			declare_war_on = {
+				target = BLY
+				type = civil_war
+			}
+			declare_war_on = {
+				target = JBR
+				type = civil_war
+			}
+			add_civil_war_target = BLY
+			add_civil_war_target = JBR
+		}
+	}
+	focus = {
+		id = PRG_lwow_is_polish_too
+		icon = GFX_focus_PRG_lwow_is_polish_too
+		x = 1
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		bypass = { NOT = { country_exists = WOL country_exists = WUK } }
+		relative_position_id = PRG_enter_the_southern_garrison
+		prerequisite = { focus = PRG_enter_the_southern_garrison }
+		prerequisite = { focus = PRG_pacify_the_kresy }
+		completion_reward = {
+			declare_war_on = {
+				target = WOL
+				type = civil_war
+			}
+			declare_war_on = {
+				target = WUK
+				type = civil_war
+			}
+			add_civil_war_target = WOL
+			add_civil_war_target = WUK
+		}
+	}
+	focus = {
+		id = PRG_a_poland_reunified
+		icon = GFX_focus_PRG_a_poland_reunified
+		x = -4
+		y = 1
+		cost = 5
+		available = { has_war = no }
+		bypass = { NOT = { country_exists = WOL country_exists = WUK } }
+		relative_position_id = PRG_lwow_is_polish_too
+		prerequisite = { focus = PRG_lwow_is_polish_too }
+		prerequisite = { focus = PRG_secure_poznan }
+		prerequisite = { focus = PRG_step_into_gdansk }
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.05
+		}
+	}
+}

@@ -1,0 +1,2679 @@
+#!gfx:interface/country/central_europe/AUS_focus.gfx
+focus_tree = {
+	id = AUS
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = AUS
+		}
+	}
+	default = no
+
+	focus = {
+		id = AUS_terror_in_sudetenland
+		icon = GFX_focus_AUS_sudeten_chaos
+		x = 0
+		y = 0
+		cost = 4
+		available_if_capitulated = yes
+		allow_branch = {
+			NOT = {
+				has_completed_focus = AUS_fight_for_fatherland
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			country_event = aus.2
+		}
+	}
+	focus = {
+		id = AUS_war_coalition
+		icon = GFX_focus_AUS_war_coalition
+		relative_position_id = AUS_terror_in_sudetenland
+		prerequisite = {
+			focus = AUS_terror_in_sudetenland
+		}
+		x = -1
+		y = 1
+		cost = 3
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			country_event = aus.19
+		}
+	}
+	focus = {
+		id = AUS_allocate_resources
+		icon = GFX_focus_AUS_allocate_guns
+		relative_position_id = AUS_terror_in_sudetenland
+		prerequisite = {
+			focus = AUS_terror_in_sudetenland
+		}
+		x = 1
+		y = 1
+		cost = 3
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			country_event = aus.20
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 500
+				producer = AUS
+			}
+			add_manpower = 4000
+			add_to_variable = {
+				var = debt_level
+				value = 7
+				tooltip = change_debt_tt
+			}
+		}
+	}
+	focus = {
+		id = AUS_austrian_media
+		icon = GFX_focus_AUS_media_safety_act
+		relative_position_id = AUS_war_coalition
+		prerequisite = {
+			focus = AUS_war_coalition
+		}
+		prerequisite = { focus = AUS_allocate_resources }
+		x = 1
+		y = 1
+		cost = 4
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_war_support	= 0.07
+			add_ideas = state_edited_press
+		}
+	}
+	focus = {
+		id = AUS_fight_for_fatherland
+		icon = GFX_focus_AUS_vaterland_fight
+		relative_position_id = AUS_austrian_media
+		prerequisite = {
+			focus = AUS_austrian_media
+		}
+		x = 0
+		y = 1
+		cost = 9
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			country_event = aus.27
+			add_timed_idea = {
+				idea = AUS_patriotic_army
+				days = 90
+			}
+			army_experience = 50
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	focus = {
+		id = AUS_demobilise_army
+		icon = GFX_focus_AUS_demobilise_men
+		relative_position_id = AUS_terror_in_sudetenland
+		available = { 
+			has_completed_focus = AUS_fight_for_fatherland
+			NOT = { has_country_flag = AUS_governmental_crisis }
+		}
+		allow_branch = {
+			has_completed_focus = AUS_fight_for_fatherland
+		}
+		offset = {
+			x = -5
+			trigger = {
+				has_completed_focus = AUS_fight_for_fatherland
+			}
+		}
+		x = 5
+		y = 0
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_ideas = volunteer_only
+			army_experience = 25
+		}
+	}
+	focus = {
+		id = AUS_neccesary_reforms
+		icon = GFX_focus_AUS_need_for_reform
+		relative_position_id = AUS_demobilise_army
+		prerequisite = {
+			focus = AUS_demobilise_army
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 4
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 30
+			army_experience = 25
+			add_doctrine_cost_reduction = {
+				name = "Army Reforms"
+				cost_reduction = 0.35
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+	focus = {
+		id = AUS_limit_paramilitaries
+		icon = GFX_focus_AUS_paramilitary_suppression
+		relative_position_id = AUS_neccesary_reforms
+		prerequisite = {
+			focus = AUS_neccesary_reforms
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_popularity = {
+				ideology = reactionism
+				popularity = -0.02
+			}
+			add_manpower = -650
+			add_war_support = -0.05
+			add_stability = 0.05
+		}
+	}
+	focus = {
+		id = AUS_new_steyr_deal
+		icon = GFX_focus_AUS_new_steyr_deal
+		relative_position_id = AUS_neccesary_reforms
+		prerequisite = {
+			focus = AUS_neccesary_reforms
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 1
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			mio:AUS_steyr_organization = {
+				add_mio_funds = 300
+			} 
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_ideas = AUS_steyr_presence
+			add_to_variable = {
+				var = debt_level
+				value = 4
+				tooltip = change_debt_tt
+			}
+		}
+	}
+	focus = {
+		id = AUS_steyr_expansion
+		icon = GFX_focus_AUS_more_steyr
+		relative_position_id = AUS_new_steyr_deal
+		prerequisite = {
+			focus = AUS_new_steyr_deal
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 1
+		y = 1
+		cost = 8
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			mio:AUS_steyr_organization = {
+				add_mio_funds = 400
+			}
+			random_core_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_to_variable = {
+				var = debt_level
+				value = 8
+				tooltip = change_debt_tt
+			}
+			swap_ideas = {
+				remove_idea = AUS_steyr_presence
+				add_idea = AUS_steyr_presence_2
+			}
+		}
+	}
+	focus = {
+		id = AUS_open_academies
+		icon = GFX_focus_AUS_open_academies
+		relative_position_id = AUS_new_steyr_deal
+		prerequisite = {
+			focus = AUS_new_steyr_deal
+		}
+		prerequisite = {
+			focus = AUS_limit_paramilitaries
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = -50
+			army_experience = 25
+			add_research_slot = 1
+			add_doctrine_cost_reduction = {
+				name = "Academic Improvements"
+				cost_reduction = 0.25
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+	focus = {
+		id = AUS_purge_idiots
+		icon = GFX_focus_AUS_purge_idiots
+		relative_position_id = AUS_limit_paramilitaries
+		prerequisite = {
+			focus = AUS_limit_paramilitaries
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			army_experience = 50
+			add_manpower = -6721
+		}
+	}
+	focus = {
+		id = AUS_new_officers
+		icon = GFX_focus_AUS_new_officers
+		relative_position_id = AUS_purge_idiots
+		prerequisite = {
+			focus = AUS_purge_idiots
+		}
+		prerequisite = {
+			focus = AUS_open_academies
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 1
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = { 
+			add_corps_commander_role = {
+				character = AUS_jansa
+				
+				skill = 3
+				attack_skill = 1
+				defense_skill = 3
+				logistics_skill = 3
+				planning_skill = 2
+				traits = { media_personality career_officer brilliant_strategist }
+			}
+			add_corps_commander_role = {
+				character = AUS_feurstein
+				
+				skill = 4
+				attack_skill = 3
+				defense_skill = 2
+				logistics_skill = 2
+				planning_skill = 4
+				traits = { infantry_officer harsh_leader }
+			}
+			add_corps_commander_role = {
+				character = AUS_hubicki
+				
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				logistics_skill = 2
+				planning_skill = 2
+				traits = { armor_officer career_officer }
+			}
+			add_corps_commander_role = {
+				character = AUS_materna
+				
+				skill = 3
+				attack_skill = 1
+				defense_skill = 3
+				logistics_skill = 3
+				planning_skill = 2
+				traits = { infantry_officer trait_cautious }
+			}
+			add_manpower = 300
+		}
+	}
+	focus = {
+		id = AUS_foreign_attaches
+		icon = GFX_focus_AUS_foreign_attaches
+		relative_position_id = AUS_open_academies
+		prerequisite = {
+			focus = AUS_open_academies
+		}
+		prerequisite = {
+			focus = AUS_steyr_expansion
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_opinion_modifier = {
+				target = SWI
+				modifier = AUS_military_attache
+			}
+			add_opinion_modifier = {
+				target = SER
+				modifier = AUS_military_attache
+			}
+			add_opinion_modifier = {
+				target = BUL
+				modifier = AUS_military_attache
+			}
+			add_opinion_modifier = {
+				target = FIN
+				modifier = AUS_military_attache
+			}
+			add_opinion_modifier = {
+				target = FRA
+				modifier = AUS_military_attache
+			}
+			FRA = {
+				army_experience = 25
+			}
+			SWI = {
+				army_experience = 25
+			}
+			SER = {
+				army_experience = 25
+			}
+			BUL = {
+				army_experience = 25
+			}
+			FIN = {
+				army_experience = 25
+			}
+			army_experience = 35
+			add_political_power = 25
+		}
+	}
+	focus = {
+		id = AUS_second_theresian_reforms
+		icon = GFX_focus_AUS_second_theresian_reforms
+		relative_position_id = AUS_foreign_attaches
+		prerequisite = {
+			focus = AUS_foreign_attaches
+		}
+		prerequisite = {
+			focus = AUS_new_officers
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 8
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			army_experience = 25
+			add_ideas = AUS_second_theresian_reforms_idea
+		}
+	}
+	focus = {
+		id = AUS_analyse_economy
+		icon = GFX_focus_AUS_analyse_economy
+		relative_position_id = AUS_terror_in_sudetenland
+		available = { 
+			has_completed_focus = AUS_fight_for_fatherland
+			NOT = { has_country_flag = AUS_governmental_crisis }
+		}
+		allow_branch = {
+			has_completed_focus = AUS_fight_for_fatherland
+		}
+		offset = {
+			x = -5
+			trigger = {
+				has_completed_focus = AUS_fight_for_fatherland
+			}
+		}
+		x = 16
+		y = 0
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 35
+		}
+	}
+	focus = {
+		id = AUS_appoint_educated_economists
+		icon = GFX_focus_AUS_appoint_economists
+		relative_position_id = AUS_analyse_economy
+		prerequisite = { focus = AUS_analyse_economy }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 3
+		available_if_capitulated = yes
+		completion_reward = {
+			add_political_power = 35
+		}
+	}
+	focus = {
+		id = AUS_mises_appointed
+		icon = GFX_focus_AUS_mises_focus
+		relative_position_id = AUS_appoint_educated_economists
+		prerequisite = { focus = AUS_appoint_educated_economists }
+		mutually_exclusive = { focus = AUS_spann_appointed }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -3
+		y = 1
+		cost = 1
+		completion_reward = {
+			activate_advisor = AUS_mises_nc
+			add_ideas = free_market_economy
+			country_event = aus.7
+		}
+	}
+	focus = { 
+		id = AUS_spann_appointed
+		icon = GFX_focus_AUS_spann_focus
+		relative_position_id = AUS_appoint_educated_economists
+		prerequisite = { focus = AUS_appoint_educated_economists }
+		mutually_exclusive = { focus = AUS_mises_appointed }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 3
+		y = 1
+		cost = 1
+		completion_reward = {
+			activate_advisor = AUS_spann_nc
+			add_ideas = mixed_economy
+		}
+	}
+	focus = {
+		id = AUS_road_to_autarky
+		icon = GFX_focus_AUS_road_to_autarky
+		relative_position_id = AUS_spann_appointed
+		prerequisite = { focus = AUS_spann_appointed }
+		available = { 
+			NOT = { 
+				has_idea = AUS_devaluation_of_krone 
+				has_idea = AUS_bad_inflation
+				has_country_flag = AUS_governmental_crisis
+			} 
+		}
+		x = 1
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_ideas = closed_economy
+			add_to_variable = {
+				var = debt_level
+				value = -5
+				tooltip = change_debt_tt
+			}
+		}
+	}
+	focus = {
+		id = AUS_theory_of_free_market
+		icon = GFX_focus_AUS_free_market_principles
+		relative_position_id = AUS_mises_appointed
+		prerequisite = { focus = AUS_mises_appointed }
+		available = { 
+			NOT = { 
+				has_idea = AUS_devaluation_of_krone 
+				has_idea = AUS_bad_inflation
+				has_country_flag = AUS_governmental_crisis
+			} 
+		}
+		x = -1
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_ideas = free_trade
+			add_to_variable = {
+				var = debt_level
+				value = -5
+				tooltip = change_debt_tt
+			}
+		}
+	}
+	focus = {
+		id = AUS_decentralised_economy
+		icon = GFX_focus_AUS_decentralise_economy
+		relative_position_id = AUS_theory_of_free_market
+		prerequisite = { focus = AUS_theory_of_free_market }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_tech_bonus = {
+				name = "Investments In Industry"
+				category = dispersed_industry_category
+				bonus = 0.35
+				uses = 2
+			}
+		}
+	}
+	focus = {
+		id = AUS_austrian_steel
+		icon = GFX_focus_AUS_austrian_steel
+		relative_position_id = AUS_road_to_autarky
+		prerequisite = { focus = AUS_road_to_autarky }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_tech_bonus = {
+				name = "Investments In Excavation"
+				category = excavation_tech
+				bonus = 0.25
+				uses = 1
+			}
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+					type = steel
+					amount = 6
+				}
+			}
+		}
+	}
+	focus = { 
+		id = AUS_university_of_international_economy
+		icon = GFX_focus_AUS_interecon_university
+		relative_position_id = AUS_decentralised_economy
+		prerequisite = { focus = AUS_decentralised_economy }
+		prerequisite = { focus = AUS_stabilise_value_of_krone }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_research_slot = 1
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	focus = { 
+		id = AUS_university_of_domestic_economy
+		icon = GFX_focus_AUS_domestic_university
+		relative_position_id = AUS_austrian_steel
+		prerequisite = { focus = AUS_austrian_steel }
+		prerequisite = { focus = AUS_stabilise_value_of_krone }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_research_slot = 1
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	focus = {
+		id = AUS_devalue_krone
+		icon = GFX_focus_AUS_krone_devaluation
+		relative_position_id = AUS_spann_appointed
+		prerequisite = { 
+			focus = AUS_spann_appointed
+			focus = AUS_mises_appointed
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -3
+		y = 1
+		cost = 8
+		completion_reward = {
+			add_political_power = -50
+			add_to_variable = {
+				var = AUS.inflation
+				value = -300
+				tooltip = AUS_inflation_change_tt
+			}
+		}
+	}
+	focus = { 
+		id = AUS_join_world_banks
+		icon = GFX_focus_AUS_foreign_banks
+		relative_position_id = AUS_mises_appointed
+		prerequisite = { focus = AUS_mises_appointed }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			unlock_decision_category_tooltip = AUS_mises_economy
+		}
+	}
+	focus = {
+		id = AUS_nationalise_big_banks
+		icon = GFX_focus_AUS_nationalise_banks
+		relative_position_id = AUS_spann_appointed
+		prerequisite = { focus = AUS_spann_appointed }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			set_variable = {
+				var = gold_reserves_austria
+				value = 0
+			}
+			unlock_decision_category_tooltip = AUS_spann_economy
+		}
+	}
+	focus = {
+		id = AUS_plead_for_debt_payout
+		icon = GFX_focus_AUS_debt_beg
+		relative_position_id = AUS_join_world_banks
+		prerequisite = { focus = AUS_join_world_banks }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+			unlock_decision_tooltip = AUS_plead_for_french_payout
+			unlock_decision_tooltip = AUS_plead_for_danubian_payout
+			unlock_decision_tooltip = AUS_plead_for_english_payout
+		}
+	}
+	focus = {
+		id = AUS_pay_debt_with_gold_reserves
+		icon = GFX_focus_AUS_gold_payout
+		relative_position_id = AUS_nationalise_big_banks
+		prerequisite = { focus = AUS_nationalise_big_banks }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+			unlock_decision_tooltip = AUS_use_gold_reserves_to_pay
+		}
+	}	
+	focus = {
+		id = AUS_stabilise_value_of_krone
+		icon = GFX_focus_AUS_stable_currency
+		relative_position_id = AUS_devalue_krone
+		prerequisite = { focus = AUS_devalue_krone }
+		prerequisite = { 
+			focus = AUS_nationalise_big_banks
+			focus = AUS_join_world_banks
+		}
+		available = { 
+			NOT = { 
+				has_country_flag = AUS_governmental_crisis
+			}
+		}
+		x = 0
+		y = 1
+		cost = 10
+		completion_reward = {
+			country_event = aus.78
+			remove_ideas = AUS_bad_inflation
+			add_to_variable = {
+				var = AUS.inflation
+				value = -600
+				tooltip = AUS_inflation_change_tt
+			}
+			add_political_power = 35
+			add_stability = 0.05
+		}
+	}
+	focus = {
+		id = AUS_augarten_porcelain
+		icon = GFX_focus_AUS_augarten_porcelain
+		relative_position_id = AUS_stabilise_value_of_krone
+		prerequisite = { focus = AUS_stabilise_value_of_krone }
+		available = { 
+			has_completed_focus = AUS_mises_appointed
+			NOT = { has_country_flag = AUS_governmental_crisis }
+		}
+		x = -3 
+		y = 1
+		cost = 4
+		completion_reward = {
+			1061 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_to_variable = {
+				var = debt_level
+				value = 3
+				tooltip = change_debt_tt
+			}
+		}
+	}
+	focus = {
+		id = AUS_bank_of_austria
+		icon = GFX_focus_AUS_nationalbank
+		relative_position_id = AUS_stabilise_value_of_krone
+		prerequisite = { focus = AUS_stabilise_value_of_krone }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+			add_to_variable = {
+				var = debt_level
+				value = -5
+				tooltip = change_debt_tt
+			}
+			add_to_variable = {
+				var = AUS.inflation
+				value = -250
+				tooltip = AUS_inflation_change_tt
+			}
+		}
+	}
+	focus = {
+		id = AUS_expand_wienerberger
+		icon = GFX_focus_AUS_wienerberger_construction
+		relative_position_id = AUS_stabilise_value_of_krone
+		prerequisite = { focus = AUS_stabilise_value_of_krone }
+		available = { 
+			has_completed_focus = AUS_spann_appointed
+			NOT = { has_country_flag = AUS_governmental_crisis }
+		}
+		x = 3
+		y = 1
+		cost = 7
+		completion_reward = {
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = { 
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex 
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_to_variable = {
+				var = debt_level
+				value = 8
+				tooltip = change_debt_tt
+			}
+		}
+	}
+	focus = {
+		id = AUS_investments_to_military
+		icon = GFX_focus_AUS_invest_to_mils
+		relative_position_id = AUS_bank_of_austria
+		prerequisite = { focus = AUS_bank_of_austria }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 7
+		completion_reward = {
+			random_core_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_to_variable = {
+				var = debt_level
+				value = 6
+				tooltip = change_debt_tt
+			}
+			unlock_military_industrial_organization_tooltip = mio:AUS_hirtenberger_organization
+			every_military_industrial_organization = {
+				add_mio_funds = 100
+			}
+		}
+	}
+	focus = {
+		id = AUS_swarovski_jewelry
+		icon = GFX_focus_AUS_swarovski
+		relative_position_id = AUS_augarten_porcelain
+		prerequisite = { focus = AUS_augarten_porcelain }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			153 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_to_variable = {
+				var = debt_level
+				value = 4
+				tooltip = change_debt_tt
+			}
+		}
+	}
+	focus = {
+		id = AUS_regiments_of_labor
+		icon = GFX_focus_AUS_penal_labor
+		relative_position_id = AUS_expand_wienerberger
+		prerequisite = { focus = AUS_expand_wienerberger }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_manpower = 500
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = AUS_autarky_achieved
+		icon = GFX_focus_AUS_austrian_autarky
+		relative_position_id = AUS_regiments_of_labor 
+		prerequisite = { focus = AUS_regiments_of_labor }
+		prerequisite = { focus = AUS_university_of_domestic_economy }
+		prerequisite = { focus = AUS_investments_to_military }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 2
+		y = 1
+		cost = 5
+		completion_reward = {
+			add_ideas = autarkic_economy
+			add_ideas = rationing
+		}
+	}
+	focus = {
+		id = AUS_libertarian_economy
+		icon = GFX_focus_AUS_ancap_dream
+		relative_position_id = AUS_swarovski_jewelry 
+		prerequisite = { focus = AUS_swarovski_jewelry }
+		prerequisite = { focus = AUS_university_of_international_economy }
+		prerequisite = { focus = AUS_investments_to_military }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -2
+		y = 1
+		cost = 5
+		completion_reward = {
+			add_ideas = { AUS_austrolibertarianism }
+		}
+	}
+	focus = {
+		id = AUS_privatise_oil_reserves
+		icon = GFX_focus_AUS_privatise_oil
+		relative_position_id = AUS_swarovski_jewelry
+		prerequisite = { focus = AUS_swarovski_jewelry }
+		prerequisite = { focus = AUS_investments_to_military }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 1
+		y = 1
+		cost = 5
+		completion_reward = {
+			4 = {
+				add_resource = {
+					type = oil
+					amount = 4
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_political_power = 25
+		}
+	}
+	focus = {
+		id = AUS_nationalise_oil_reserves
+		icon = GFX_focus_AUS_nationalise_oil
+		relative_position_id = AUS_regiments_of_labor
+		prerequisite = { focus = AUS_regiments_of_labor }
+		prerequisite = { focus = AUS_investments_to_military }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 5
+		completion_reward = {
+			4 = {
+				add_resource = {
+					type = oil
+					amount = 7
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_to_variable = {
+				var = debt_level
+				value = 5
+				tooltip = change_debt_tt
+			}
+		}
+	}
+	focus = {
+		id = AUS_steyr_dominance
+		icon = GFX_focus_AUS_steyr_dominance
+		relative_position_id = AUS_privatise_oil_reserves
+		prerequisite = {
+			focus = AUS_nationalise_oil_reserves
+			focus = AUS_privatise_oil_reserves
+		}
+		available = { 
+			has_completed_focus = AUS_steyr_expansion
+			NOT = { has_country_flag = AUS_governmental_crisis }
+		}
+		x = 1
+		y = 1
+		cost = 6
+		completion_reward = {
+			mio:AUS_steyr_organization = {
+				add_mio_funds = 500
+			}
+			swap_ideas = {
+				remove_idea = AUS_steyr_presence_2
+				add_idea = AUS_steyr_presence_3
+			}
+		}
+	}
+	focus = {
+		id = AUS_1923_elections
+		icon = GFX_focus_AUS_1923_election
+		relative_position_id = AUS_terror_in_sudetenland
+		available = { always = no }
+		allow_branch = {
+			has_completed_focus = AUS_fight_for_fatherland
+		}
+		x = 0
+		y = 7
+		cost = 1
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			end_coalition = yes
+		}
+	}
+	focus = {
+		id = AUS_csp_victory
+		icon = GFX_focus_AUS_csp_victory
+		relative_position_id = AUS_1923_elections
+		prerequisite = { focus = AUS_1923_elections }
+		available = { always = no }
+		x = -2
+		y = 1
+		cost = 1
+		available_if_capitulated = yes
+		completion_reward = {
+			set_politics = {
+				ruling_party = conservatism
+			}
+			set_temp_variable = { coalition_partner_var = token:authoritarian_democrat }
+			add_to_coalition = yes
+			add_popularity = {
+				ideology = conservatism
+				popularity = 0.05
+			}
+			hidden_effect = {
+				news_event = aus.16
+				AUS_michael_hainisch = {
+					remove_country_leader_role = {
+						ideology = national_democracy
+					}
+					add_country_leader_role = {
+						promote_leader = yes
+						country_leader = {
+							ideology = christian_democracy
+							traits = {
+								gdvp_ties
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = AUS_sdapo_victory
+		icon = GFX_focus_AUS_sdapo_election
+		relative_position_id = AUS_1923_elections
+		prerequisite = { focus = AUS_1923_elections }
+		available = { always = no }
+		x = 2
+		y = 1
+		cost = 1
+		available_if_capitulated = yes
+		completion_reward = {
+			set_politics = {
+				ruling_party = social_democrat
+			}
+			set_temp_variable = { coalition_partner_var = token:libertarian_socialism }
+			add_to_coalition = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			activate_advisor = AUS_renner_hog
+			activate_advisor = AUS_hanusch_em
+			activate_advisor = AUS_scharf_sm
+			activate_advisor = AUS_deutsch_dm
+			hidden_effect = {
+				news_event = aus.17
+				AUS_michael_hainisch = {
+					remove_country_leader_role = {
+						ideology = national_democracy
+					}
+					add_country_leader_role = {
+						promote_leader = yes
+						country_leader = {
+							ideology = social_democrat_subtype
+							traits = {
+								gdvp_ties
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = AUS_make_people_forget
+		icon = GFX_focus_AUS_austrian_dementia
+		relative_position_id = AUS_sdapo_victory
+		prerequisite = { 
+			focus = AUS_sdapo_victory
+			focus = AUS_csp_victory
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -2
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_political_power = 25
+			remove_ideas = AUS_memories_of_the_empire
+		}
+	}
+	focus = {
+		id = AUS_deal_with_communists
+		icon = GFX_focus_AUS_calm_down_kpo
+		relative_position_id = AUS_sdapo_victory
+		prerequisite = { focus = AUS_sdapo_victory }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_popularity = {
+				ideology = marxism
+				popularity = 0.025
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_stability = 0.05
+			add_political_power = -20
+		}
+	}
+	focus = {
+		id = AUS_provide_for_the_poor
+		icon = GFX_focus_AUS_provide_for_poor
+		relative_position_id = AUS_sdapo_victory 
+		prerequisite = { focus = AUS_sdapo_victory }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 2
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_stability = 0.05
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+			add_to_variable = {
+                var = debt_level
+                value = 5
+				tooltip = change_debt_tt
+            }
+		}
+	}
+	focus = {
+		id = AUS_principle_of_leftism
+		icon = GFX_focus_AUS_expand_married_women_freedom
+		relative_position_id = AUS_deal_with_communists
+		prerequisite = { focus = AUS_deal_with_communists }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_ideas = AUS_women_rights
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.025
+			}
+			add_political_power = 25
+		}
+	}
+	focus = {
+		id = AUS_child_protection_laws_focus
+		icon = GFX_focus_AUS_children_protection
+		relative_position_id = AUS_provide_for_the_poor 
+		prerequisite = { focus = AUS_provide_for_the_poor }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_ideas = banned_gun_ownership
+			add_ideas = AUS_child_protection_laws
+		}
+	}
+	focus = {
+		id = AUS_expand_peoples_coalition
+		icon = GFX_focus_AUS_expand_peoples_coalition
+		relative_position_id = AUS_principle_of_leftism
+		prerequisite = { focus = AUS_principle_of_leftism }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = AUS_increase_workplace_security
+		icon = GFX_focus_AUS_increase_workplace_security
+		relative_position_id = AUS_child_protection_laws_focus 
+		prerequisite = { focus = AUS_child_protection_laws_focus }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_ideas = AUS_workplace_safety_laws
+		}
+	}
+	focus = {
+		id = AUS_peoples_democracy
+		icon = GFX_focus_AUS_peoples_democracy
+		relative_position_id = AUS_increase_workplace_security
+		prerequisite = { focus = AUS_increase_workplace_security }
+		prerequisite = { focus = AUS_expand_peoples_coalition }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			random_core_state = {
+			add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_stability = 0.05
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = AUS_spread_word_of_lord
+		icon = GFX_focus_AUS_spread_word_of_lord
+		relative_position_id = AUS_csp_victory
+		prerequisite = { focus = AUS_csp_victory }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -2
+		y = 1
+		cost = 4
+		completion_reward = {
+			random_core_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_stability = 0.05
+		}
+	}
+	focus = {
+		id = AUS_gdvp_pookie
+		icon = GFX_focus_AUS_ally_gdvp
+		relative_position_id = AUS_csp_victory
+		prerequisite = { focus = AUS_csp_victory }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_popularity = {
+				ideology = revolutionary_nationalism
+				popularity = 0.05
+			}
+			add_political_power = 25
+			# IMPORTANT NOTE! REPLACE THE EFFECT WITH AN EVENT THAT LETS YOU CHOOSE WHETHER OR NOT ADD GDVP TO YOUR COALITION
+		}
+	}
+	focus = {
+		id = AUS_allies_in_landbund
+		icon = GFX_focus_AUS_allies_in_landbund
+		relative_position_id = AUS_gdvp_pookie
+		prerequisite = { focus = AUS_gdvp_pookie }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_popularity = {
+				ideology = liberalism
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = AUS_dont_forget_hainisch
+		icon = GFX_focus_AUS_deal_with_president
+		relative_position_id = AUS_allies_in_landbund
+		prerequisite = { focus = AUS_allies_in_landbund }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		bypass = {
+			OR = {
+				has_country_flag = AUS_seitz_1924_won
+				has_country_flag = AUS_renner_1924_won
+			}
+		}
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+			add_stability = 0.05
+			add_popularity = {
+				ideology = conservatism
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = AUS_catholic_love 
+		icon = GFX_focus_AUS_reinforce_heimwehr
+		relative_position_id = AUS_spread_word_of_lord
+		prerequisite = { focus = AUS_spread_word_of_lord }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.03
+			}
+			add_manpower = 7500
+		}
+	}
+	focus = {
+		id = AUS_cant_forget_traditions
+		icon = GFX_focus_AUS_cant_forget_traditions
+		relative_position_id = AUS_catholic_love
+		prerequisite = { focus = AUS_catholic_love }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_ideas = AUS_traditionalism
+		}
+	}
+	focus = {
+		id = AUS_media_free_again
+		icon = GFX_focus_AUS_free_press
+		relative_position_id = AUS_make_people_forget
+		prerequisite = { focus = AUS_make_people_forget }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_ideas = free_press
+			if = {
+				limit = { has_government = social_democrat }
+				add_popularity = {
+					ideology = social_democrat 
+					popularity = -0.05
+				}
+			}
+			else = {
+				add_popularity = {
+					ideology = conservatism
+					popularity = -0.05
+				}
+			}
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = AUS_fight_corruption
+		icon = GFX_focus_AUS_fight_corruption
+		relative_position_id = AUS_media_free_again
+		prerequisite = { focus = AUS_media_free_again }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_timed_idea = {
+				idea = AUS_fighting_corruption
+				days = 60
+			}
+		}
+	}
+	focus = {
+		id = AUS_new_justice_system
+		icon = GFX_focus_AUS_new_justice_system
+		relative_position_id = AUS_fight_corruption
+		prerequisite = { focus = AUS_fight_corruption }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			if = {
+				limit = { has_government = social_democrat }
+				activate_advisor = AUS_eisler_nc
+			}
+			else = {
+				activate_advisor = AUS_ender_nc
+			}
+		}
+	}
+	focus = {
+		id = AUS_gods_democracy
+		icon = GFX_focus_AUS_gods_democracy
+		relative_position_id = AUS_cant_forget_traditions
+		prerequisite = { focus = AUS_cant_forget_traditions }
+		prerequisite = { focus = AUS_dont_forget_hainisch }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			random_core_state = {
+			add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_stability = 0.05
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = AUS_strong_austrian_democracy
+		icon = GFX_focus_AUS_strong_austrian_democracy
+		relative_position_id = AUS_new_justice_system 
+		prerequisite = { focus = AUS_new_justice_system }
+		prerequisite = {
+			focus = AUS_peoples_democracy
+			focus = AUS_gods_democracy
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			remove_ideas = AUS_fragile_democracy
+			add_stability = 0.05
+			add_political_power = 25
+		}
+	}
+	focus = {
+		id = AUS_1927_elections
+		icon = GFX_focus_AUS_1927_election
+		relative_position_id = AUS_strong_austrian_democracy
+		available = { always = no }
+		allow_branch = {
+			has_completed_focus = AUS_fight_for_fatherland
+		}
+		cost = 1
+		x = 0
+		y = 2
+		completion_reward = {
+			end_coalition = yes
+			set_party_name = {
+				ideology = reactionism
+				name = AUS_heimatbloc_party
+				long_name = AUS_heimatbloc_party_long
+			}
+		}
+	}
+	focus = {
+		id = AUS_austria_into_foreign
+		icon = GFX_focus_AUS_free_austria
+		relative_position_id = AUS_1927_elections
+		prerequisite = {
+			focus = AUS_1927_elections
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } NOT = { has_government = libertarian_socialism } NOT = { has_government = marxism } NOT = { has_government = bolshevism } }
+		x = 0
+		y = 1
+		cost = 3
+        completion_reward = {
+			add_political_power = 25
+            army_experience = 5
+            add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = AUS_sdapo_foreign_policy
+		icon = GFX_focus_AUS_bauer
+		relative_position_id = AUS_austria_into_foreign
+		prerequisite = { focus = AUS_austria_into_foreign }
+		available = { 
+			has_government = social_democrat
+			NOT = { has_country_flag = AUS_governmental_crisis }
+		}
+		x = 1
+		y = 1
+		cost = 2
+		completion_reward = {
+			activate_advisor = AUS_bauer_nc
+		}
+	}	
+	focus = {
+		id = AUS_csp_foreign_policy
+		icon = GFX_focus_AUS_breisky
+		relative_position_id = AUS_austria_into_foreign
+		prerequisite = { focus = AUS_austria_into_foreign }
+		available = { 
+			OR = { 
+				has_government = conservatism 
+				has_government = authoritarian_democrat 
+			}
+			NOT = { has_country_flag = AUS_governmental_crisis }
+		}
+		x = -1
+		y = 1
+		cost = 2
+		completion_reward = {
+			activate_advisor = AUS_breisky_nc
+		}
+	}
+    focus = {
+		id = AUS_a_pragmatic_axis_membership
+		icon = GFX_focus_AUS_axis
+		relative_position_id = AUS_austria_into_foreign
+		prerequisite = { focus = AUS_csp_foreign_policy }
+		available = { 
+			NOT = { has_country_flag = AUS_governmental_crisis } 
+			is_subject = no
+		}
+		x = -2
+		y = 2
+		cost = 5
+        mutually_exclusive = {
+			focus = AUS_enforce_austrian_neutrality focus = AUS_contact_the_commonwealth
+		}
+		completion_reward = {
+			unlock_decision_tooltip = cw_join_axis
+			set_country_flag = cw_join_axis_unlocked
+		}
+	}
+    focus = {
+		id = AUS_finish_the_hungarian_job
+		icon = GFX_focus_AUS_job
+		relative_position_id = AUS_austria_into_foreign
+		prerequisite = { focus = AUS_a_pragmatic_axis_membership focus = AUS_enforce_austrian_neutrality focus = AUS_contact_the_commonwealth }
+		available = { 
+			NOT = { has_country_flag = AUS_governmental_crisis }
+			is_subject = no
+			NOT = {
+				has_truce_with = HUN
+				HUN = {
+					has_country_flag = HUN_unlock_rearmament_flag
+				}
+			}
+		}
+		bypass = {
+			NOT = {
+				country_exists = HUN
+			}
+			HUN = { is_subject_of = AUS }
+		}
+		x = -1
+		y = 3
+		cost = 5
+		completion_reward = {
+			declare_war_on = {
+                target = HUN
+                type = puppet_wargoal_focus
+            }
+            add_war_support = 0.05
+		}
+	}
+    focus = {
+		id = AUS_enforce_austrian_neutrality
+		icon = GFX_focus_AUS_neutral
+		relative_position_id = AUS_austria_into_foreign
+		prerequisite = { focus = AUS_csp_foreign_policy focus = AUS_sdapo_foreign_policy }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } is_subject = no }
+		x = 0
+		y = 2
+		cost = 5
+        mutually_exclusive = {
+			focus = AUS_contact_the_commonwealth focus = AUS_a_pragmatic_axis_membership
+		}
+		completion_reward = {
+			remove_ideas = axis_observer
+            add_ideas = AUS_austrian_neutrality
+		}
+	}
+    focus = {
+		id = AUS_contact_the_commonwealth
+		icon = GFX_focus_AUS_commonwealth
+		relative_position_id = AUS_austria_into_foreign
+		prerequisite = { focus = AUS_sdapo_foreign_policy }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } NOT = { has_government = libertarian_socialism } is_subject = no }
+		x = 2
+		y = 2
+		cost = 5
+        mutually_exclusive = {
+			focus = AUS_enforce_austrian_neutrality focus = AUS_a_pragmatic_axis_membership
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = axis_observer
+				add_idea = commonwealth_observer
+			}
+            add_stability = 0.1
+            add_political_power = 50
+		}
+	}
+    focus = {
+		id = AUS_incorporate_liechtenstein
+		icon = GFX_focus_AUS_liechtenstein
+		relative_position_id = AUS_austria_into_foreign
+		prerequisite = { focus = AUS_a_pragmatic_axis_membership focus = AUS_enforce_austrian_neutrality focus = AUS_contact_the_commonwealth }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } is_subject = no }
+		x = 1
+		y = 3
+		cost = 5
+		completion_reward = {
+			AUS = {
+			annex_country = { 
+				target = LIE
+				transfer_troops = yes 
+			}
+		    }
+            939 = {
+				add_resource = {
+					type = aluminium
+					amount = 3
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = AUS_question_of_sudtirol
+		icon = GFX_focus_AUS_question_of_sudtirol
+		available = { 
+			has_completed_focus = AUS_strong_austrian_democracy
+			NOT = { has_country_flag = AUS_governmental_crisis }
+		}
+		allow_branch = {
+			has_completed_focus = AUS_fight_for_fatherland
+		}
+		ai_will_do = {
+			factor = 20
+		}
+		x = -6
+		y = 0
+		cost = 3
+		completion_reward = {
+			add_political_power = 30
+		}
+	}
+	focus = {
+		id = AUS_sudtirol_was_always_german
+		icon = GFX_focus_AUS_sudtirol_was_always_german
+		relative_position_id = AUS_question_of_sudtirol
+		prerequisite = { focus = AUS_question_of_sudtirol }
+		mutually_exclusive = { focus = AUS_autonomy_for_italians }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		ai_will_do = {
+			factor = 25
+		}
+		x = -1
+		y = 1
+		cost = 1
+		completion_reward = {
+			39 = {
+				add_compliance = 10
+			}
+			add_stability = -0.04
+		}
+	}
+	focus = {
+		id = AUS_send_italians_back
+		icon = GFX_focus_AUS_send_italians_back
+		relative_position_id = AUS_sudtirol_was_always_german
+		prerequisite = { focus = AUS_sudtirol_was_always_german }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		ai_will_do = {
+			factor = 20
+		}
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			39 = {
+				add_manpower = -75400
+				add_compliance = 5
+			}
+			160 = {
+				add_manpower = 75400
+			}
+			add_stability = 0.02
+		}
+	}
+	focus = {
+		id = AUS_autonomy_for_italians
+		icon = GFX_focus_AUS_autonomy_for_italians
+		relative_position_id = AUS_question_of_sudtirol
+		prerequisite = { focus = AUS_question_of_sudtirol }
+		mutually_exclusive = { focus = AUS_sudtirol_was_always_german }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		ai_will_do = {
+			factor = 9.5
+		}
+		x = 1
+		y = 1
+		cost = 1
+		completion_reward = {
+			39 = {
+				add_compliance = 15
+			}
+			add_political_power = 45
+			custom_effect_tooltip = AUS_hw_wontlikethat_tt
+		}
+	}
+	focus = {
+		id = AUS_encourage_italian_immigration
+		icon = GFX_focus_AUS_encourage_italian_immigration
+		relative_position_id = AUS_autonomy_for_italians
+		prerequisite = { focus = AUS_autonomy_for_italians }
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		ai_will_do = {
+			factor = 20
+		}
+		x = 0
+		y = 1
+		cost = 1
+		completion_reward = {
+			add_stability = -0.02
+			add_war_support = -0.03
+			add_political_power = 45
+			add_manpower = 400
+		}
+	}
+	focus = {
+		id = AUS_restore_local_administration
+		icon = GFX_focus_AUS_restore_local_administration
+		relative_position_id = AUS_encourage_italian_immigration 
+		ai_will_do = {
+			factor = 20
+		}
+		prerequisite = {
+			focus = AUS_encourage_italian_immigration
+			focus = AUS_send_italians_back
+		}
+		available = { NOT = { has_country_flag = AUS_governmental_crisis } }
+		x = -1
+		y = 1
+		cost = 5
+		completion_reward = {
+			if = {
+				limit = { has_completed_focus = AUS_autonomy_for_italians }
+				
+				mark_focus_tree_layout_dirty = yes
+				hidden_effect = {
+					complete_national_focus = AUS_march_of_the_heimwehr
+				}
+			}
+			add_state_core = 39
+			add_stability = -0.02
+		}
+	}
+	focus = {
+		id = AUS_march_of_the_heimwehr
+		icon = GFX_focus_AUS_march_of_the_heimwehr
+		relative_position_id = AUS_restore_local_administration
+		prerequisite = {
+			focus = AUS_restore_local_administration
+		}
+		allow_branch = { has_completed_focus = AUS_autonomy_for_italians }
+		x = 0
+		y = 1
+		cost = 1
+		completion_reward = {
+			country_event = aus.11
+		}
+	}
+	focus = {
+		id = AUS_radical_sdapo
+		icon = GFX_focus_AUS_radical_sdapo
+		relative_position_id = AUS_1927_elections
+		prerequisite = {
+			focus = AUS_1927_elections
+		}
+		available = {
+			always = no
+		}
+		x = 12
+		y = 1
+		cost = 3
+		completion_reward = {
+			set_politics = {
+				ruling_party = libertarian_socialism
+			}
+			AUS_renner = {
+				remove_country_leader_role = {
+					ideology = christian_democracy
+				}
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						ideology = democratic_socialism
+					}
+				}
+			}
+			set_temp_variable = { coalition_partner_var = token:social_democrat }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	focus = {
+		id = AUS_austrian_revolution
+		icon = GFX_focus_AUS_austrian_revolution
+		relative_position_id = AUS_radical_sdapo
+		prerequisite = {
+			focus = AUS_radical_sdapo
+		}
+		available = {
+			has_country_flag = AUS_schattendorf_concluded
+		}
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			country_event = aus.58
+			country_event = {
+				id = aus.63
+				days = 7
+			}
+		}
+	}
+	focus = {
+		id = AUS_ban_the_heimwehr
+		icon = GFX_focus_AUS_ban_the_heimwehr
+		relative_position_id = AUS_austrian_revolution
+		prerequisite = {
+			focus = AUS_austrian_revolution
+		}
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			country_event = aus.59
+		}
+	}
+	focus = {
+		id = AUS_rally_the_proletariat
+		icon = GFX_focus_AUS_rally_the_proletariat
+		relative_position_id = AUS_austrian_revolution
+		prerequisite = {
+			focus = AUS_austrian_revolution
+		}
+		x = 2
+		y = 1
+		cost = 3
+		completion_reward = {
+			country_event = aus.60
+		}
+	}
+	focus = {
+		id = AUS_final_solution_to_capitalist_question
+		icon = GFX_focus_AUS_nationalise_capitalist_properties
+		relative_position_id = AUS_austrian_revolution
+		prerequisite = {
+			focus = AUS_austrian_revolution
+		}
+		x = -2
+		y = 1
+		cost = 3
+		completion_reward = {
+			country_event = aus.61
+		}
+	}
+	focus = {
+		id = AUS_workers_attack
+		icon = GFX_focus_AUS_workers_attack
+		relative_position_id = AUS_ban_the_heimwehr
+		prerequisite = {
+			focus = AUS_ban_the_heimwehr
+		}
+		prerequisite = {
+			focus = AUS_final_solution_to_capitalist_question
+		}
+		prerequisite = {
+			focus = AUS_rally_the_proletariat
+		}
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = AUS_operation_no_heimwehr
+		icon = GFX_focus_AUS_unternehmen_adler
+		relative_position_id = AUS_workers_attack
+		prerequisite = {
+			focus = AUS_workers_attack
+		}
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = AUS_workers_revolution
+		icon = GFX_focus_AUS_workers_revolution
+		relative_position_id = AUS_operation_no_heimwehr
+		prerequisite = {
+			focus = AUS_operation_no_heimwehr
+		}
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	focus = {
+		id = AUS_revolution_success
+		icon = GFX_focus_AUS_revolution_success
+		relative_position_id = AUS_workers_revolution
+		prerequisite = {
+			focus = AUS_workers_revolution
+		}
+		allow_branch = {
+			has_completed_focus = AUS_workers_revolution
+		}
+		select_effect = {
+			set_country_flag = AUS_communist_congress_ongoing
+			country_event = {
+				id = aus.57
+				days = 1
+			}
+		}
+		x = 0
+		y = 1
+		cost = 10
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = AUS_communism_on_the_rise
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_revolution_success
+		prerequisite = {
+			focus = AUS_revolution_success
+		}
+		mutually_exclusive = {
+			focus = AUS_sdapo_holds
+		}
+		available = {
+			always = no
+		}
+		x = 4
+		y = 1
+		cost = 10
+		completion_reward = {
+			set_politics = {
+				ruling_party = bolshevism
+			}
+			set_party_name = {
+				ideology = libertarian_socialism
+				long_name = AUS_austromarxist_party_long
+				name = AUS_austromarxist_party
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = AUS_new_socdem_party_long
+				name = AUS_new_socdem_party
+			}
+		}
+	}
+	focus = {
+		id = AUS_sdapo_holds
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_revolution_success
+		prerequisite = {
+			focus = AUS_revolution_success
+		}
+		mutually_exclusive = {
+			focus = AUS_communism_on_the_rise
+		}
+		available = {
+			always = no
+		}
+		x = -3
+		y = 1
+		cost = 10
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = AUS_principles_of_austromarxism
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_sdapo_holds
+		prerequisite = {
+			focus = AUS_sdapo_holds
+		}
+		x = 0
+		y = 1
+		cost = 10
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = AUS_moderate_sdapo
+		icon = GFX_focus_AUS_moderate_sdapo
+		relative_position_id = AUS_1927_elections
+		prerequisite = {
+			focus = AUS_1927_elections
+		}
+		available = {
+			always = no
+		}
+		x = 6
+		y = 1
+		cost = 3
+		completion_reward = {
+			set_politics = {
+				ruling_party = libertarian_socialism
+			}
+			set_temp_variable = { coalition_partner_var = token:libertarian_socialism }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	focus = {
+		id = AUS_construct_cheap_housing
+		icon = GFX_focus_AUS_construct_cheap_housing
+		relative_position_id = AUS_moderate_sdapo
+		prerequisite = {
+			focus = AUS_moderate_sdapo
+		}
+		x = 2
+		y = 1
+		cost = 3
+		completion_reward = {
+			every_owned_state = {
+				add_manpower = 2500
+			}
+		}
+	}
+	focus = {
+		id = AUS_community_jobs
+		icon = GFX_focus_AUS_community_jobs
+		relative_position_id = AUS_moderate_sdapo
+		prerequisite = {
+			focus = AUS_moderate_sdapo
+		}
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			every_owned_state = {
+				add_1_infra = yes
+			}
+		}
+	}
+	focus = {
+		id = AUS_question_of_the_radicals
+		icon = GFX_focus_AUS_fate_of_the_radicals
+		relative_position_id = AUS_moderate_sdapo
+		prerequisite = {
+			focus = AUS_moderate_sdapo
+		}
+		x = -2
+		y = 1
+		cost = 3
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = AUS_distance_from_july_movement
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_question_of_the_radicals
+		prerequisite = {
+			focus = AUS_question_of_the_radicals
+			focus = AUS_community_jobs
+		}
+		x = 1
+		y = 1
+		cost = 3
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = AUS_limit_the_heimwehr
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_community_jobs
+		prerequisite = {
+			focus = AUS_construct_cheap_housing
+			focus = AUS_community_jobs
+		}
+		x = 1
+		y = 1
+		cost = 3
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = AUS_new_form_of_austromarxism
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_distance_from_july_movement
+		prerequisite = {
+			focus = AUS_limit_the_heimwehr
+		}
+		prerequisite = {
+			focus = AUS_distance_from_july_movement
+		}
+		x = 1
+		y = 1
+		cost = 3
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = AUS_conservative_csp
+		icon = GFX_focus_AUS_conservative_csp
+		relative_position_id = AUS_1927_elections
+		prerequisite = {
+			focus = AUS_1927_elections
+		}
+		available = { always = no }
+		x = -6
+		y = 1
+		cost = 3
+		completion_reward = {
+			set_politics = {
+				ruling_party = conservatism
+			}
+			set_temp_variable = { coalition_partner_var = token:authoritarian_democrat }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	focus = {
+		id = AUS_loyalty_to_pope
+		icon = GFX_focus_AUS_loyalty_to_pope
+		relative_position_id = AUS_conservative_csp
+		prerequisite = {
+			focus = AUS_conservative_csp
+		}
+		x = -2
+		y = 1
+		cost = 3
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = AUS_catholic_state_religion
+		icon = GFX_focus_AUS_catholic_state_religion
+		relative_position_id = AUS_conservative_csp
+		prerequisite = {
+			focus = AUS_conservative_csp
+		}
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_ideas = AUS_catholic_religion
+		}
+	}
+	focus = {
+		id = AUS_distance_from_gdvp
+		icon = GFX_focus_AUS_distance_from_gdvp
+		relative_position_id = AUS_loyalty_to_pope
+		prerequisite = {
+			focus = AUS_loyalty_to_pope
+			focus = AUS_catholic_state_religion
+		}
+		x = 1
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_popularity = {
+				ideology = revolutionary_nationalism
+				popularity = -0.05
+			}
+		}
+	}
+	focus = {
+		id = AUS_distance_from_heimwehr
+		icon = GFX_focus_AUS_distance_from_heimwehr
+		relative_position_id = AUS_conservative_csp
+		prerequisite = {
+			focus = AUS_conservative_csp
+		}
+		x = 2
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_ideas = AUS_sidelined_heimwehr
+		}
+	}
+	focus = {
+		id = AUS_help_small_business
+		icon = GFX_focus_AUS_help_small_business
+		relative_position_id = AUS_distance_from_gdvp
+		prerequisite = {
+			focus = AUS_distance_from_heimwehr
+			focus = AUS_catholic_state_religion
+		}
+		x = 2
+		y = 0
+		cost = 3
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build  = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build  = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build  = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = AUS_serving_austria
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_distance_from_gdvp
+		prerequisite = {
+			focus = AUS_help_small_business
+		}
+		prerequisite = {
+			focus = AUS_distance_from_gdvp
+		}
+		x = 1
+		y = 1
+		cost = 3
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = AUS_unity_list_csp
+		icon = GFX_focus_AUS_unity_list_csp
+		relative_position_id = AUS_1927_elections
+		prerequisite = {
+			focus = AUS_1927_elections
+		}
+		available = { always = no }
+		x = -12
+		y = 1
+		cost = 3
+		completion_reward = {
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				long_name = AUS_authoritarian_democrat_party_long
+				name = CSP_unity_list_name_auth_short
+			}
+			set_party_name = {
+				ideology = conservatism
+				long_name = AUS_conservatism_party_long
+				name = CSP_unity_list_name_cons
+			}
+			set_party_name = {
+				ideology = reactionism
+				long_name = AUS_heimatbloc_party_long
+				name = CSP_unity_list_name_react
+			}
+			set_party_name = {
+				ideology = revolutionary_nationalism
+				long_name = AUS_revolutionary_nationalism_party_long
+				name = CSP_unity_list_name_natsynd
+			}
+			set_party_name = {
+				ideology = liberalism
+				long_name = AUS_liberalism_party_long
+				name = CSP_unity_list_name_liberalism
+			}
+			set_temp_variable = { coalition_partner_var = token:conservatism }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:reactionism }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:liberalism }
+			add_to_coalition = yes
+			set_temp_variable = { coalition_partner_var = token:revolutionary_nationalism }
+			add_to_coalition = yes
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	focus = {
+		id = AUS_csp_enabling_act
+		icon = GFX_focus_AUS_csp_enabling_act
+		relative_position_id = AUS_unity_list_csp
+		prerequisite = {
+			focus = AUS_unity_list_csp
+		}
+		available = {
+			has_country_flag = AUS_schattendorf_concluded
+		}
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			country_event = {
+				id = aus.46
+			}
+			country_event = {
+				id = aus.48
+				days = 2
+			}
+			add_stability = -0.05
+			AUS_ignaz_seipel = {
+				remove_country_leader_role = {
+					ideology = christian_democracy
+				}
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						ideology = authoritarian_democrat_subtype
+						traits = {
+							unpopular_leader
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_idea = AUS_child_protection_laws
+				}
+				remove_ideas = AUS_child_protection_laws
+			}
+		}
+	}
+	focus = {
+		id = AUS_ban_communism
+		icon = GFX_focus_AUS_ban_communism
+		relative_position_id = AUS_csp_enabling_act
+		prerequisite = {
+			focus = AUS_csp_enabling_act
+		}
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+			add_popularity = {
+				ideology = marxism
+				popularity = -1
+			}
+			set_party_name = {
+				ideology = marxism
+				name = REDACTED
+				long_name = DATA_EXPUNGED
+			}
+		}
+	}
+	focus = {
+		id = AUS_cut_taxes_everywhere
+		icon = GFX_focus_AUS_cut_taxes_everywhere
+		relative_position_id = AUS_ban_communism
+		prerequisite = {
+			focus = AUS_ban_communism
+		}
+		x = -2
+		y = 1
+		cost = 5
+		completion_reward = {
+			add_ideas = AUS_small_taxes
+		}
+	}
+	focus = {
+		id = AUS_bloody_vienna
+		icon = GFX_focus_AUS_bloody_vienna
+		relative_position_id = AUS_ban_communism
+		prerequisite = {
+			focus = AUS_ban_communism
+		}
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+			1061 = {
+				set_demilitarized_zone = yes
+				add_manpower = -5000
+			}
+		}
+	}
+	focus = {
+		id = AUS_ban_sdapo
+		icon = GFX_focus_AUS_ban_sdapo
+		relative_position_id = AUS_ban_communism
+		prerequisite = {
+			focus = AUS_ban_communism
+		}
+		x = 2
+		y = 1
+		cost = 5
+		completion_reward = {
+			add_stability = -0.05
+			add_political_power = 50
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -1
+			}
+			set_party_name = {
+				ideology = social_democrat
+				name = REDACTED
+				long_name = DATA_EXPUNGED
+			}
+		}
+	}
+	focus = {
+		id = AUS_clock_strikes_twelve
+		icon = GFX_focus_AUS_clock_strikes_twelve
+		relative_position_id = AUS_cut_taxes_everywhere
+		prerequisite = {
+			focus = AUS_cut_taxes_everywhere
+		}
+		prerequisite = {
+			focus = AUS_bloody_vienna
+		}
+		prerequisite = {
+			focus = AUS_ban_sdapo
+		}
+		x = 2
+		y = 1
+		cost = 8
+		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
+			country_event = aus.53
+		}
+	}
+	focus = {
+		id = AUS_midnight_arrives
+		icon = GFX_focus_AUS_midnight_arrives
+		relative_position_id = AUS_clock_strikes_twelve
+		prerequisite = {
+			focus = AUS_clock_strikes_twelve
+		}
+		allow_branch = {
+			has_completed_focus = AUS_clock_strikes_twelve
+		}
+		x = 0
+		y = 1
+		cost = 10
+		completion_reward = {
+			set_cosmetic_tag = AUS_radical_csp_cosmetic
+			country_event = aus.55
+		}
+	}
+	focus = {
+		id = AUS_eliminate_marxists
+		icon = GFX_focus_AUS_eliminate_marxists
+		relative_position_id = AUS_midnight_arrives
+		prerequisite = {
+			focus = AUS_midnight_arrives
+		}
+		x = -2
+		y = 1
+		cost = 5
+		completion_reward = {
+			every_owned_state = {
+				add_manpower = -2000
+			}
+		}
+	}
+	focus = {
+		id = AUS_destroy_last_sdapo_cells
+		icon = GFX_focus_AUS_destroy_last_sdapo_cells
+		relative_position_id = AUS_midnight_arrives
+		prerequisite = {
+			focus = AUS_midnight_arrives
+		}
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+			add_ideas = AUS_consolidated_control
+			every_owned_state = {
+				add_manpower = -1000
+			}
+		}
+	}
+	focus = {
+		id = AUS_grand_coalition_meeting
+		icon = GFX_focus_AUS_grand_coalition_meeting
+		relative_position_id = AUS_eliminate_marxists
+		prerequisite = {
+			focus = AUS_eliminate_marxists
+			focus = AUS_destroy_last_sdapo_cells
+		}
+		x = 1
+		y = 1
+		cost = 5
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = AUS_heimwehr_as_state_military
+		icon = GFX_focus_AUS_heimwehr_as_state_military
+		relative_position_id = AUS_midnight_arrives
+		prerequisite = {
+			focus = AUS_midnight_arrives
+		}
+		x = 2
+		y = 1
+		cost = 5
+		completion_reward = {
+			add_ideas = {
+				AUS_heimwehr_rampant
+			}
+		}
+	}
+	focus = {
+		id = AUS_clerical_state
+		icon = GFX_focus_AUS_clerical_state
+		relative_position_id = AUS_eliminate_marxists
+		prerequisite = {
+			focus = AUS_heimwehr_as_state_military
+			focus = AUS_destroy_last_sdapo_cells
+		}
+		x = 3
+		y = 1
+		cost = 5
+		completion_reward = {
+			add_ideas = AUS_uplifted_clerics
+		}
+	}
+	focus = {
+		id = AUS_dreams_of_greater_austria
+		icon = GFX_focus_AUS_dreams_of_greater_austria
+		relative_position_id = AUS_clerical_state
+		prerequisite = {
+			focus = AUS_clerical_state
+		}
+		prerequisite = {
+			focus = AUS_grand_coalition_meeting
+		}
+		will_lead_to_war_with = CZE
+		available = { is_subject = no }
+		x = -1
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_state_claim = 1214
+			add_state_claim = 9
+			add_state_claim = 1212
+			add_state_claim = 75
+			add_state_claim = 72
+			if = {
+				limit = {
+					OR = {
+						CZE = {
+							is_in_faction_with = FRA
+						}
+						CZE = {
+							is_guaranteed_by = FRA
+						}
+					}
+				}
+				FRA = {
+					country_event = aus.52
+				}
+			}
+			else = {
+				AUS = {
+					declare_war_on = {
+						target = CZE
+						type = annex_everything
+					}
+				}
+			}
+		}
+	}
+}

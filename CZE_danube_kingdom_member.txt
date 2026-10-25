@@ -1,0 +1,17 @@
+#!gfx:interface/country/central_europe/CZE/CZE_focus.gfx
+focus_tree = {
+    id = CZE_danube_kingdom_member
+	
+    country = {
+        base = 0
+    }
+	
+	focus = {
+	    id = CZE_udk_new_king
+		x = 5
+		y = 0
+		cost = 5
+		completion_reward = {
+		}
+	}
+}

@@ -1,0 +1,32 @@
+focus_tree = {
+	id = CZE_noslovaks
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = CZE
+		}
+	}
+	default = no
+
+	focus = {
+		id = CZE_nothing_ever_happens
+		icon = GFX_goal_generic_demand_territory
+		x = 0
+		y = 0
+		cost = 10
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+		    set_politics = {
+			    ruling_party = esotericism
+			}
+			add_popularity = {
+			    ideology = esotericism
+				popularity = 1
+			}
+		}
+	}
+}

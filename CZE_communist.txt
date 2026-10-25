@@ -1,0 +1,285 @@
+#!gfx:interface/country/central_europe/CZE/CZE_focus.gfx
+
+focus_tree = {
+    id = CZE_communist
+	
+    country = {
+		factor = 0
+        base = 0
+        modifier = {
+        }
+    }
+
+	focus = {
+	    id = CZE_the_triumph_of_ksc
+		icon = GFX_focus_CZE_a_je_to
+		x = 20
+		y = 1
+		cost = 3
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_form_government_coalition_on_the_left
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_the_triumph_of_ksc }
+		x = 18
+		y = 2
+		cost = 3
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_sway_the_opposition
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_form_government_coalition_on_the_left }
+		mutually_exclusive = { focus = CZE_get_rid_of_the_opposition }
+		x = 20
+		y = 3
+		cost = 3
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_support_the_austro_marxist
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_form_government_coalition_on_the_left }
+		x = 16
+		y = 3
+		cost = 3
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_support_the_spartakusbund
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_support_the_austro_marxist }
+		x = 16
+		y = 4
+		cost = 3
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_question_of_the_comintern
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_support_the_spartakusbund }
+		x = 16
+		y = 5
+		cost = 3
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_coup_hungary
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_question_of_the_comintern }
+		x = 16
+		y = 6
+		cost = 3
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_coup_austria
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_question_of_the_comintern }
+		x = 18
+		y = 6
+		cost = 3
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_social_welfare_program
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_nationalize_the_economy }
+		x = 22
+		y = 4
+		cost = 4
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_grant_sudeten_germans_autonomy
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_issue_equal_rights_for_everyone }
+		x = 24
+		y = 4
+		cost = 4
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_establish_parliament_of_left_ethnicites
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_grant_sudeten_germans_autonomy }
+		prerequisite = { focus = CZE_social_welfare_program }
+		x = 24
+		y = 5
+		cost = 4
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_strenghten_trade_unions
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_nationalize_the_economy }
+		x = 20
+		y = 4
+		cost = 4
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_develop_heavy_industry
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_strenghten_trade_unions }
+		prerequisite = { focus = CZE_social_welfare_program }
+		x = 20
+		y = 5
+		cost = 4
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_introduce_tarrifs
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_social_welfare_program }
+		x = 22
+		y = 5
+		cost = 4
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_establish_socialist_federation
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_introduce_tarrifs }
+		prerequisite = { focus = CZE_develop_heavy_industry }
+		prerequisite = { focus = CZE_establish_parliament_of_left_ethnicites }
+		prerequisite = { focus = CZE_communism_dominated_czechoslovakia }
+		x = 22
+		y = 6
+		cost = 4
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_outlaw_nationalist_parties
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_get_rid_of_the_opposition focus = CZE_sway_the_opposition }
+		x = 18
+		y = 4
+		cost = 4
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_communism_dominated_czechoslovakia
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_outlaw_nationalist_parties }
+		x = 18
+		y = 5
+		cost = 4
+		completion_reward = {
+		}
+	}
+
+
+	focus = {
+	    id = CZE_get_rid_of_the_opposition
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_form_government_coalition_on_the_left }
+		mutually_exclusive = { focus = CZE_sway_the_opposition }
+		x = 18
+		y = 3
+		cost = 3
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_what_is_socialism
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_the_triumph_of_ksc }
+		x = 23
+		y = 2
+		cost = 3
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_nationalize_the_economy
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_what_is_socialism }
+		x = 22
+		y = 3
+		cost = 3
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_issue_equal_rights_for_everyone
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_what_is_socialism }
+		x = 24
+		y = 3
+		cost = 3
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+	    id = CZE_slovak_sr
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_establish_socialist_federation }
+		x = 20
+		y = 7
+		cost = 4
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_question_of_moravian_sr
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_establish_socialist_federation }
+		x = 22
+		y = 7
+		cost = 4
+		completion_reward = {
+		}
+	}
+
+	focus = {
+	    id = CZE_sudeten_sr
+		icon = GFX_focus_CZE_a_je_to
+		prerequisite = { focus = CZE_establish_socialist_federation }
+		x = 24
+		y = 7
+		cost = 4
+		completion_reward = {
+		}
+	}
+}
+
+

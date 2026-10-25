@@ -1,0 +1,17 @@
+focus_tree = {
+	id = UKR_anarchy
+	country = {
+		factor = 0
+	}
+	default = no
+	focus = {
+		id = UKR_anarchy_restabilize
+		#icon =
+		cost = 5
+		x = 5
+		available = {has_country_flag = UKR_civil_war_over }
+		completion_reward = {
+			
+		}
+	}
+}

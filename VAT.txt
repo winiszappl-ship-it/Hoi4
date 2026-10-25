@@ -1,0 +1,350 @@
+focus_tree = {
+	id = vat.focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = VAT
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 0 y = 1400 }
+	
+	focus = {
+		id = VAT_death_of_pope
+		#icon =
+		
+        x = 5
+        y = 1
+		
+        cost = 0
+		
+		allow_branch = {
+			NOT = {
+				has_country_leader = {
+					character = VAT_pope_benedict_xv
+					ruling_only = yes
+				}
+			}
+		}
+		
+		available = { hidden_trigger = { always = no }}
+	}	
+	focus = {
+		id = VAT_the_waiting_game
+		#icon =
+		
+		prerequisite = {focus = VAT_death_of_pope}
+		
+		relative_position_id = VAT_death_of_pope	
+        x = 0
+        y = 1
+		
+        cost = 10
+	}
+	focus = {
+		id = VAT_papal_conclave_1
+		#icon =
+		
+		prerequisite = {focus = VAT_the_waiting_game}
+		
+		relative_position_id = VAT_the_waiting_game			
+        x = 0
+        y = 1
+		
+        cost = 1
+		
+		completion_reward = {
+			country_event = vat.2
+		}
+	}	
+	focus = {
+		id = VAT_gasparri
+		#icon =
+		
+		mutually_exclusive = {focus = VAT_ratti}
+		mutually_exclusive = {focus = VAT_val}
+		
+		prerequisite = {focus = VAT_papal_conclave_1}
+		
+		relative_position_id = VAT_papal_conclave_1		
+        x = -2
+        y = 1
+		
+        cost = 0
+				
+		available = { hidden_trigger = { always = no }}
+		
+		completion_reward = {
+			promote_character = VAT_pope_benedict_xvi_gas
+		}
+	}
+	focus = {
+		id = VAT_ratti
+		#icon =
+		
+		mutually_exclusive = {focus = VAT_val}
+		mutually_exclusive = {focus = VAT_gasparri}
+		
+		prerequisite = {focus = VAT_papal_conclave_1}
+		
+		relative_position_id = VAT_papal_conclave_1		
+        x = 0
+        y = 1
+		
+        cost = 0
+				
+		available = { hidden_trigger = { always = no }}
+		
+		completion_reward = {
+			promote_character = VAT_pope_pius_xi_rat
+		}
+	}
+	focus = {
+		id = VAT_val
+		#icon =
+		
+		mutually_exclusive = {focus = VAT_ratti}
+		mutually_exclusive = {focus = VAT_gasparri}
+		
+		prerequisite = {focus = VAT_papal_conclave_1}
+		
+		relative_position_id = VAT_papal_conclave_1		
+        x = 2
+        y = 1
+		
+        cost = 0
+				
+		available = { hidden_trigger = { always = no }}
+		
+		completion_reward = {
+			promote_character = VAT_pope_pius_xi_val
+		}
+	}
+	focus = {
+		id = VAT_first_30
+		#icon =
+	
+		prerequisite = {
+			focus = VAT_gasparri
+			focus = VAT_ratti
+			focus = VAT_val
+		}
+		
+		relative_position_id = VAT_ratti	
+        x = 0
+        y = 1
+		
+        cost = 4.29
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = VAT_propose_con
+		#icon =
+	
+		prerequisite = {
+			focus = VAT_first_30
+		}
+		prerequisite = {
+			focus = VAT_val
+			focus = VAT_ratti
+		}
+		mutually_exclusive = {focus = VAT_propose_lib}
+		
+		relative_position_id = VAT_first_30	
+        x = 2
+        y = 1
+		
+        cost = 5
+
+		completion_reward = {
+			add_popularity = {
+				ideology = conservatism
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = VAT_propose_lib
+		#icon =
+	
+		prerequisite = {
+			focus = VAT_first_30
+		}
+		prerequisite = {
+			focus = VAT_gasparri
+			focus = VAT_ratti
+		}
+		mutually_exclusive = {focus = VAT_propose_con}
+		
+		relative_position_id = VAT_first_30	
+        x = -2
+        y = 1
+		
+        cost = 5
+
+		completion_reward = {
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = VAT_inact_policies
+		#icon =
+	
+		prerequisite = {
+			focus = VAT_propose_con
+			focus = VAT_propose_lib
+		}
+		
+		relative_position_id = VAT_propose_lib
+        x = 2
+        y = 2
+		
+        cost = 8
+
+		completion_reward = {
+			add_stability = 0.15
+			add_political_power = 120
+		}
+	}
+	focus = {
+		id = VAT_reach_out_italy
+		#icon =
+	
+		prerequisite = {
+			focus = VAT_propose_con
+			focus = VAT_propose_lib
+		}
+		
+		mutually_exclusive = {focus = VAT_influence_italy}
+		
+		relative_position_id = VAT_propose_lib
+        x = 0
+        y = 1
+		
+        cost = 10
+
+		completion_reward = {
+			country_event = vat.3
+		}
+	}
+	focus = {
+		id = VAT_influence_italy
+		#icon =
+	
+		prerequisite = {
+			focus = VAT_propose_con
+		}
+		
+		mutually_exclusive = {focus = VAT_reach_out_italy}
+		
+		relative_position_id = VAT_propose_con
+        x = 0
+        y = 1
+		
+        cost = 5
+
+		completion_reward = {
+			set_variable = {
+				var = VAT_vatican_support
+				value = 0
+			}	
+		}
+	}
+	focus = {
+		id = VAT_vatican_expand
+		#icon =
+	
+		prerequisite = {
+			focus = VAT_influence_italy
+		}
+		
+		available = { hidden_trigger = { always = no }}
+		
+		relative_position_id = VAT_influence_italy
+        x = 0
+        y = 1
+		
+        cost = 0
+
+		completion_reward = {	
+			country_event = vat.4
+			hidden_effect = {
+				clear_variable = VAT_vatican_support		
+				transfer_state = 2
+				add_state_core = 2
+				load_oob = "VAT_take_over"
+				every_state = {
+					limit = {is_core_of = TUS}
+					add_claim_by = VAT
+				}
+				declare_war_on = {
+					target = TUS
+					type = annex_everything
+				}
+				add_civil_war_target = TUS
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 2000
+					producer = TUS
+				}
+				swap_ideas = {
+					remove_idea = disarmed_nation
+					add_idea = volunteer_only
+				}					
+			}
+		}
+	}
+	focus = {
+		id = VAT_birth_paple_state
+		#icon =
+	
+		prerequisite = {
+			focus = VAT_vatican_expand
+		}
+		prerequisite = {
+			focus = VAT_inact_policies
+		}
+
+		available = {
+			NOT = { 
+				has_war_with = TUS
+				country_exists = TUS
+			}
+			owns_state = 2
+		}
+		
+		relative_position_id = VAT_vatican_expand
+        x = 0
+        y = 1
+		
+        cost = 1
+
+		completion_reward = {
+			set_cosmetic_tag = VAT_STATE
+			hidden_effect = {
+				delete_unit_template_and_units = {
+					division_template = "Volunteer Militia Brigade"
+					disband = yes 
+				}
+				load_oob = "VAT_state_setup"
+				TUS = { mark_focus_tree_layout_dirty = yes } 
+				set_country_flag = papal_state
+			}
+			load_focus_tree = vat_papal_state.focus
+		}
+	}
+}

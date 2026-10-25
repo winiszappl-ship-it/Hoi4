@@ -1,0 +1,1468 @@
+#!gfx:interface/country/central_europe/AUS_focus.gfx
+focus_tree = {
+    id = AUS_heimwehr
+
+    country = {
+        base = 0
+    }
+
+	continuous_focus_position = { x = 1900 y = 100 }
+    
+    focus = {
+        id = AUS_take_matters_into_own_hands
+        icon = GFX_focus_AUS_take_matters_into_own_hands
+        x = 5
+        y = 0
+        cost = 1
+        completion_reward = {
+			1060 = { set_demilitarized_zone = yes }
+			153 = { set_demilitarized_zone = yes }
+			1058 = { set_demilitarized_zone = yes }
+			1288 = { set_demilitarized_zone = yes }
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.05
+			}
+			add_stability = -0.05
+        }        
+    }
+	focus = {
+		id = AUS_hammer_on_italians
+		icon = GFX_focus_AUS_hammer_on_italians
+		relative_position_id = AUS_take_matters_into_own_hands
+		prerequisite = { focus = AUS_take_matters_into_own_hands }
+		x = -1
+		y = 1
+		cost = 2
+		completion_reward = {
+			1062 = { 
+				add_manpower = -620 
+				set_demilitarized_zone = yes
+			}
+			39 = {
+				add_manpower = -5341
+				set_demilitarized_zone = yes
+			}
+			1059 = { set_demilitarized_zone = yes }
+		}
+	}
+	focus = {
+		id = AUS_strike_the_red_traitors
+		icon = GFX_focus_AUS_strike_the_red_traitors
+		relative_position_id = AUS_take_matters_into_own_hands
+		prerequisite = { focus = AUS_take_matters_into_own_hands }
+		x = 1 
+		y = 1
+		cost = 2
+		completion_reward = {
+			1057 = { set_demilitarized_zone = yes }
+			4 = { 
+				set_demilitarized_zone = yes
+				add_manpower = -450
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.07
+			}
+		}
+	}
+	focus = {
+		id = AUS_complete_our_march
+		icon = GFX_focus_AUS_complete_our_march
+		relative_position_id = AUS_strike_the_red_traitors
+		prerequisite = {
+			focus = AUS_strike_the_red_traitors
+		}
+		prerequisite = {
+			focus = AUS_hammer_on_italians
+		}
+		x = -1
+		y = 1
+		cost = 3
+		completion_reward = {
+			set_politics = {
+				ruling_party = reactionism
+			}
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.04
+			}
+			add_stability = 0.03
+			set_cosmetic_tag = AUS_heimwehr_color
+			news_event = aus.12
+			activate_advisor = AUS_steidle_hog
+			activate_advisor = AUS_steidle_sm
+			activate_advisor = AUS_hiltl_em
+			activate_advisor = AUS_starhemberg_dm
+			deactivate_advisor = AUS_ender_nc
+			deactivate_advisor = AUS_eisler_nc
+		}
+	}
+	focus = {
+		id = AUS_army_purges
+		icon = GFX_focus_AUS_army_purges
+		relative_position_id = AUS_complete_our_march
+		available = { has_completed_focus = AUS_complete_our_march }
+		x = -2
+		y = 1
+		cost = 2
+		completion_reward = {
+			add_corps_commander_role = {
+				character = AUS_von_echt
+				
+				skill = 2
+				attack_skill = 2
+				defense_skill = 1
+				logistics_skill = 1
+				planning_skill = 2
+				traits = { career_officer politically_connected }
+			}
+			add_corps_commander_role = {
+				character = AUS_pranckh
+				
+				skill = 2
+				attack_skill = 1
+				defense_skill = 2
+				logistics_skill = 1
+				planning_skill = 1
+				traits = { career_officer politically_connected }
+			}
+			add_field_marshal_role = {
+				character = AUS_steidle
+				
+				skill = 3
+				attack_skill = 4
+				defense_skill = 1
+				logistics_skill = 2
+				planning_skill = 2
+				traits = { career_officer politically_connected infantry_officer }
+			}
+			add_field_marshal_role = {
+				character = AUS_pfrimer
+				
+				skill = 2
+				attack_skill = 2
+				defense_skill = 1
+				logistics_skill = 3
+				planning_skill = 1
+				traits = { career_officer politically_connected }
+			}
+			add_manpower = -566
+		}
+	}
+	focus = {
+		id = AUS_mobilisation_of_economy
+		icon = GFX_focus_AUS_mobilisation_of_economy
+		relative_position_id = AUS_army_purges
+		prerequisite = { focus = AUS_army_purges }
+		x = 0
+		y = 1
+		cost = 2
+		completion_reward = {
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_ideas = closed_economy
+			add_ideas = state_economy
+			add_ideas = a_gun_for_every_household
+			add_stability = -0.05
+			add_manpower = 500
+			
+		}
+	}
+	focus = {
+		id = AUS_restore_civilian_government
+		icon = GFX_focus_AUS_restore_civilian_government
+		relative_position_id = AUS_complete_our_march
+		available = { has_completed_focus = AUS_complete_our_march }
+		x = 2
+		y = 1
+		cost = 2
+		completion_reward = {
+			activate_advisor = AUS_dinghofer_hog
+			add_popularity = {
+				ideology = reactionism 
+				popularity = 0.08
+			}
+			set_party_name = {
+				ideology = revolutionary_nationalism
+				long_name = AUS_natsynd_hw_party_long
+				name = AUS_natsynd_hw_party
+			}
+			every_owned_state = {
+				set_demilitarized_zone = no 
+			}
+			add_political_power = 75
+			promote_character = AUS_folfuss
+		}
+	}
+	focus = {
+		id = AUS_heimwehr_for_everyone
+		icon = GFX_focus_AUS_heimwehr_for_everyone
+		relative_position_id = AUS_restore_civilian_government
+		prerequisite = { focus = AUS_restore_civilian_government }
+		x = 0
+		y = 1
+		cost = 2
+		completion_reward = {
+			add_popularity = {
+				ideology = reactionism 
+				popularity = 0.05
+			}
+			set_party_name = {
+				ideology = despotism
+				long_name = AUS_desp_hw_party_long
+				name = AUS_desp_hw_party
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = AUS_authdem_hw_party_long
+				name = AUS_authdem_hw_party
+			}
+			add_political_power = 25
+			add_stability = 0.05
+			promote_character = AUS_wilhelm_miklas
+			promote_character = AUS_spann
+		}
+	}
+	focus = {
+		id = AUS_new_leader_of_heimwehr
+		icon = GFX_focus_AUS_new_leader_of_heimwehr
+		relative_position_id = AUS_mobilisation_of_economy
+		prerequisite = { focus = AUS_mobilisation_of_economy }
+		prerequisite = { focus = AUS_heimwehr_for_everyone }
+		x = 2
+		y = 1
+		cost = 3
+		completion_reward = { 
+			country_event = aus.15
+		}
+	}
+######################### PFRIMER PATH ############################################
+	focus = {
+		id = AUS_pfrimer_victory
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_new_leader_of_heimwehr
+		prerequisite = { focus = AUS_new_leader_of_heimwehr }
+		allow_branch = {
+			AND = {
+				has_country_leader = { 
+					character = AUS_pfrimer
+					ruling_only = yes
+				}
+				has_completed_focus = AUS_new_leader_of_heimwehr
+			}
+		}
+		x = 0
+		y = 1
+		cost = 2
+		completion_reward = {
+			activate_advisor = AUS_wiligut_sm
+			add_political_power = 45
+			add_stability = 0.03
+		}
+	}
+	focus = {
+		id = AUS_issues_resurface
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_pfrimer_victory
+		prerequisite = { focus = AUS_pfrimer_victory }
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_popularity = {
+				ideology = revolutionary_nationalism
+				popularity = 0.03
+			}
+			add_political_power = 50
+			add_stability = -0.02
+		}
+	}
+	focus = {
+		id = AUS_new_german_identity
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_issues_resurface
+		prerequisite = { focus = AUS_issues_resurface }
+		x = -1
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_war_support = 0.04
+			add_political_power = 45
+			add_ideas = AUS_pangermanism
+		}
+	}
+	focus = {
+		id = AUS_militarist_society
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_issues_resurface
+		prerequisite = { focus = AUS_issues_resurface }
+		x = 1
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_manpower = 2500
+			add_war_support = 0.07
+		}
+	}
+	focus = {
+		id = AUS_abolish_the_assembly
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_new_german_identity
+		prerequisite = { focus = AUS_new_german_identity }
+		prerequisite = { focus = AUS_militarist_society }
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			set_party_name = {
+				ideology = reactionism
+				long_name = AUS_pfrimer_austria_party_long
+				name = AUS_pfrimer_austria_party
+			}
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.05
+			}
+			add_stability = 0.03
+			add_political_power = -30
+		}
+	}
+	focus = {
+		id = AUS_glorify_hre
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_new_german_identity
+		prerequisite = { focus = AUS_new_german_identity }
+		x = -2
+		y = 1
+		cost = 3
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = AUS_pangermanism
+				add_idea = AUS_pangermanism_2
+			}
+			add_stability = 0.04
+		}
+	}
+	focus = {
+		id = AUS_equal_position
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_glorify_hre
+		prerequisite = { focus = AUS_glorify_hre }
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = AUS_pangermanism_2
+				add_idea = AUS_pangermanism_3
+			}
+			add_stability = 0.02
+			add_war_support = 0.05
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.03
+			}
+		}
+	}
+	focus = {
+		id = AUS_youth_in_the_army
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_militarist_society
+		prerequisite = { focus = AUS_militarist_society }
+		x = 2
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_ideas = extensive_conscription
+			add_war_support = 0.05
+			add_manpower = 3600
+		}
+	}
+	focus = {
+		id = AUS_grand_paramilitary
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_youth_in_the_army
+		prerequisite = { focus = AUS_youth_in_the_army }
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_war_support = 0.04
+			add_manpower = 4000
+		}
+	}
+	focus = {
+		id = AUS_under_pfrimer_protection
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_abolish_the_assembly
+		prerequisite = { focus = AUS_abolish_the_assembly }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			set_cosmetic_tag = AUS_pfrimer
+			activate_advisor = AUS_krebs_dm
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = AUS_all_roads_lead_to_berlin
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_under_pfrimer_protection
+		prerequisite = {
+			focus = AUS_under_pfrimer_protection
+		}
+		prerequisite = {
+			focus = AUS_equal_position
+		}
+		prerequisite = {
+			focus = AUS_grand_paramilitary
+		}
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			set_country_flag = repair_damaged_roads_flag
+			unlock_decision_category_tooltip = GER_states_coring_category
+			add_political_power = 40
+		}
+	}
+	focus = {
+		id = AUS_attack_bavaria
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_all_roads_lead_to_berlin
+		prerequisite = { focus = AUS_all_roads_lead_to_berlin }
+		available = { is_neighbor_of = BAV }
+		available = { has_war = no } 
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			declare_war_on = {
+				target = BAV
+				type = annex_everything
+			}
+			add_civil_war_target = BAV
+		}
+	}
+	focus = {
+		id = AUS_attack_freikorps
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_all_roads_lead_to_berlin
+		prerequisite = { focus = AUS_all_roads_lead_to_berlin }
+		available = { is_neighbor_of = FGB }
+		available = { has_war = no } 
+		x = -2
+		y = 1
+		cost = 4
+		completion_reward = {
+			declare_war_on = {
+				target = FGB
+				type = annex_everything
+			}
+			add_civil_war_target = FGB
+		}
+	}
+	focus = {
+		id = AUS_destroy_wrd
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_all_roads_lead_to_berlin
+		prerequisite = { focus = AUS_all_roads_lead_to_berlin }
+		available = { is_neighbor_of = WRD }
+		available = { has_war = no } 
+		x = -4
+		y = 1
+		cost = 4
+		completion_reward = {
+			declare_war_on = {
+				target = WRD
+				type = annex_everything
+			}
+			add_civil_war_target = WRD
+		}
+	}
+	focus = {
+		id = AUS_execute_red_sailors
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_all_roads_lead_to_berlin
+		prerequisite = { focus = AUS_all_roads_lead_to_berlin }
+		available = { is_neighbor_of = FWG }
+		available = { has_war = no } 
+		x = -6
+		y = 1
+		cost = 4
+		completion_reward = {
+			declare_war_on = {
+				target = FWG
+				type = annex_everything
+			}
+			add_civil_war_target = FWG
+		}
+	}
+	focus = {
+		id = AUS_end_corrupt_republic
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_all_roads_lead_to_berlin
+		prerequisite = { focus = AUS_all_roads_lead_to_berlin }
+		available = { is_neighbor_of = GER }
+		available = { has_war = no } 
+		x = 2
+		y = 1
+		cost = 4
+		completion_reward = {
+			declare_war_on = {
+				target = GER
+				type = annex_everything
+			}
+			add_civil_war_target = GER
+		}
+	}
+	focus = {
+		id = AUS_end_to_german_judobolshevism
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_all_roads_lead_to_berlin
+		prerequisite = { focus = AUS_all_roads_lead_to_berlin }
+		available = { is_neighbor_of = UVS }
+		available = { has_war = no } 
+		x = 4
+		y = 1
+		cost = 4
+		completion_reward = {
+			declare_war_on = {
+				target = UVS
+				type = annex_everything
+			}
+			add_civil_war_target = UVS
+		}
+	}
+	focus = {
+		id = AUS_germany_for_germans
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_all_roads_lead_to_berlin
+		prerequisite = { focus = AUS_all_roads_lead_to_berlin }
+		available = { is_neighbor_of = PLA }
+		available = { has_war = no } 
+		x = 6
+		y = 1
+		cost = 4
+		completion_reward = {
+			declare_war_on = {
+				target = PLA
+				type = annex_everything
+			}
+			add_civil_war_target = PLA
+		}
+	}
+	focus = {
+		id = AUS_new_germania
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_attack_bavaria
+		prerequisite = {
+			focus = AUS_attack_bavaria
+			focus = AUS_attack_freikorps
+			focus = AUS_destroy_wrd
+			focus = AUS_execute_red_sailors
+			focus = AUS_end_corrupt_republic
+			focus = AUS_end_to_german_judobolshevism
+			focus = AUS_germany_for_germans
+		}
+		available = {
+			NOT = { country_exists = WRD }
+			NOT = { country_exists = FGB }
+			NOT = { country_exists = BAV }
+			NOT = { country_exists = UVS }
+			NOT = { country_exists = PLA }
+			NOT = { country_exists = GER }
+			NOT = { country_exists = FWG }
+			owns_state = 836
+		}
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+			country_event = aus.21
+			country_event = {
+				id = aus.41
+				days = 50
+			}
+			set_cosmetic_tag = AUS_germany 
+			add_political_power = 85
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.08
+			}
+			set_party_name = {
+				ideology = reactionism
+				name = AUS_pfrimer_germany_party
+				long_name = AUS_pfrimer_germany_party_long
+			}
+		}
+	}
+	focus = {
+		id = AUS_ministry_for_religious_affairs
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_new_germania
+		prerequisite = { focus = AUS_new_germania }
+		x = -9
+		y = 2
+		cost = 1
+		completion_reward = {
+			country_event = aus.24
+			add_political_power = 35
+		}
+	}
+	focus = {
+		id = AUS_glory_to_ariosophy
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_ministry_for_religious_affairs
+		prerequisite = { focus = AUS_ministry_for_religious_affairs }
+		mutually_exclusive = { focus = AUS_remain_loyal_to_the_pope }
+		available = { has_country_flag = AUS_embraced_ariosophy_flag }
+		x = -2
+		y = 1
+		cost = 2
+		completion_reward = {
+			add_popularity = {
+				ideology = esotericism
+				popularity = 0.03
+			}
+			set_party_name = {
+				ideology = esotericism
+				long_name = AUS_pfrimer_eso_party_long
+				name = AUS_pfrimer_eso_party
+			}
+			add_war_support = 0.03
+			set_temp_variable = { coalition_partner_var = token:esotericism }
+			add_to_coalition = yes
+		}
+	}
+	focus = {
+		id = AUS_remain_loyal_to_the_pope
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_ministry_for_religious_affairs
+		prerequisite = { focus = AUS_ministry_for_religious_affairs }
+		available = { has_country_flag = AUS_embraced_catholicism_flag }
+		mutually_exclusive = { focus = AUS_glory_to_ariosophy }
+		x = 2
+		y = 1
+		cost = 2
+		completion_reward = {
+			add_stability = 0.02
+			add_political_power = 30
+		}
+	}
+	focus = {
+		id = AUS_fight_degeneracy
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_remain_loyal_to_the_pope
+		prerequisite = { 
+			focus = AUS_remain_loyal_to_the_pope 
+			focus = AUS_glory_to_ariosophy
+		}
+		x = -2
+		y = 1
+		cost = 4
+		completion_reward = {
+			set_party_name = {
+				ideology = bolshevism
+				long_name = AUS_bolshevik_banned_party_long
+				name = AUS_bolshevik_banned_party
+			}
+			set_party_name = {
+				ideology = marxism
+				long_name = AUS_marxist_banned_party_long
+				name = AUS_marxist_banned_party
+			}
+			add_manpower = -10000
+		}
+	}
+	focus = {
+		id = AUS_rebuild_churches
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_remain_loyal_to_the_pope
+		prerequisite = {
+			focus = AUS_remain_loyal_to_the_pope
+		}
+		x = 1
+		y = 1
+		cost = 3
+		completion_reward = {
+			random_core_state = {
+				add_building_construction = {
+					type = infrastructure 
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_core_state = {
+				add_building_construction = {
+					type = infrastructure 
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_core_state = {
+				add_building_construction = {
+					type = infrastructure 
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_core_state = {
+				add_building_construction = {
+					type = infrastructure 
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_stability = 0.05
+		}
+	}
+	focus = {
+		id = AUS_germania_under_catholicism
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_rebuild_churches
+		prerequisite = {
+			focus = AUS_rebuild_churches
+		}
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.07
+			}
+			add_stability = 0.03
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = AUS_integrate_thule
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_glory_to_ariosophy
+		prerequisite = { 
+			focus = AUS_glory_to_ariosophy
+		}
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_popularity = {
+				ideology = esotericism
+				popularity = 0.05
+			}
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = AUS_in_search_for_atlantis
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_integrate_thule
+		prerequisite = { 
+			focus = AUS_integrate_thule
+		}
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_stability = -0.05
+			add_war_support = 0.08
+			add_political_power = 45
+		}
+	}
+	focus = {
+		id = AUS_friends_of_the_thelema
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_integrate_thule
+		prerequisite = { 
+			focus = AUS_integrate_thule
+		}
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_popularity = {
+				ideology = esotericism
+				popularity = 0.04
+			}
+			add_war_support = 0.05
+		}
+	}	
+	focus = {
+		id = AUS_peoples_economic_councils
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_new_germania
+		prerequisite = { focus = AUS_new_germania }
+		x = 9
+		y = 2
+		cost = 1
+		completion_reward = {
+			add_political_power = 45
+		}
+	}
+	focus = {
+		id = AUS_spannism_above_all
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_peoples_economic_councils
+		prerequisite = { focus = AUS_peoples_economic_councils }
+		x = 0 
+		y = 1
+		cost = 2
+		completion_reward = {
+			random_core_state = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_core_state = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_core_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_political_power = 45
+		}
+	}
+	focus = {
+		id = AUS_heimwehr_influence_in_mining
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_spannism_above_all
+		prerequisite = { focus = AUS_spannism_above_all }
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			59 = {
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+					type = steel
+					amount = 21
+				}
+			}
+			1056 = {
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+					type = steel
+					amount = 11
+				}
+			}
+		}
+	}
+	focus = {
+		id = AUS_start_nationalisation_process
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_spannism_above_all
+		prerequisite = { focus = AUS_spannism_above_all }
+		x = -1
+		y = 1
+		cost = 2
+		completion_reward = {
+			add_stability = 0.02
+			random_core_state = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_to_variable = {
+				var = debt_level
+				value = 7
+				tooltip = change_debt_tt
+			}
+		}
+	}
+	focus = {
+		id = AUS_upheld_agrarian_traditions
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_start_nationalisation_process
+		prerequisite = { focus = AUS_start_nationalisation_process }
+		prerequisite = { focus = AUS_heimwehr_influence_in_mining }
+		x = 1
+		y = 1
+		cost = 2
+		completion_reward = {
+			random_core_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_stability = 0.02
+		}
+	}
+	focus = {
+		id = AUS_call_to_all_farmers
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_upheld_agrarian_traditions
+		prerequisite = { focus = AUS_upheld_agrarian_traditions }
+		mutually_exclusive = { focus = AUS_germanic_corporatism }
+		x = -3
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_ideas = agrarian_economy
+			add_ideas = AUS_breadbasket_of_europe
+			add_political_power = 25
+		}
+	}
+	focus = {
+		id = AUS_germanic_corporatism
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_upheld_agrarian_traditions
+		prerequisite = { focus = AUS_upheld_agrarian_traditions }
+		mutually_exclusive = { focus = AUS_call_to_all_farmers }
+		x = 3
+		y = 1
+		cost = 3
+		completion_reward = {
+			random_core_state = {
+				add_building_construction = {
+					type = industrial_complex 
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			add_ideas = rationing
+		}
+	}
+	focus = {
+		id = AUS_restore_contact_with_french
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_new_germania
+		prerequisite = { focus = AUS_new_germania }
+		x = 0
+		y = 2
+		cost = 1
+		completion_reward = {
+			swap_ideas = {
+				add_idea = axis_member
+				remove_idea = axis_observer
+			}
+			add_political_power = 50
+			add_opinion_modifier = {
+				target = FRA
+				modifier = AUS_friendly_germanic_government
+			}
+		}
+	}
+	focus = {
+		id = AUS_frankish_treaty
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_restore_contact_with_french
+		prerequisite = { focus = AUS_restore_contact_with_french }
+		mutually_exclusive = { focus = AUS_black_spot_in_mitteleuropa }
+		x = -2
+		y = 1
+		cost = 2
+		completion_reward = {
+			add_stability = 0.03
+			add_war_support = 0.03
+		}
+	}
+	focus = {
+		id = AUS_friends_of_national_reactionary_bloc
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_frankish_treaty
+		prerequisite = { focus = AUS_frankish_treaty }
+		x = -1
+		y = 1
+		cost = 3
+		completion_reward = {
+			every_country = {
+				limit = {
+					OR = {
+						has_government = reactionism
+						has_government = revolutionary_nationalism
+					}
+				}
+				add_opinion_modifier = {
+					modifier = AUS_national_reactionary_bloc
+					target = AUS
+				}
+			}
+		}
+	}
+	focus = {
+		id = AUS_formally_sign_a_peace_treaty
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_frankish_treaty
+		prerequisite = { focus = AUS_frankish_treaty }
+		x = 1
+		y = 1
+		cost = 3
+		completion_reward = {
+			diplomatic_relation = {
+				country = FRA
+				relation = non_aggression_pact
+				active = yes
+			}
+			add_political_power = 35
+		}
+	}
+	focus = {
+		id = AUS_rhineland_for_gratitude
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_formally_sign_a_peace_treaty
+		prerequisite = { focus = AUS_formally_sign_a_peace_treaty }
+		prerequisite = { focus = AUS_friends_of_national_reactionary_bloc }
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			RHI = {
+				set_state_controller = 42
+				set_state_controller = 975
+				set_state_controller = 1084
+				set_state_controller = 1085
+				set_state_owner = 42
+				set_state_owner = 975
+				set_state_owner = 1084
+				set_state_owner = 1085
+				set_cosmetic_tag = RHI_france
+				set_politics = {
+					ruling_party = reactionism
+				}
+			}
+			FRA = {
+				diplomatic_relation = {
+					country = RHI
+					relation = puppet
+					active = yes
+				}
+				add_to_faction = AUS
+			}
+			add_ideas = axis_military_bloc
+		}
+	}
+	focus = {
+		id = AUS_invasion_of_the_alps
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_rhineland_for_gratitude
+		prerequisite = { focus = AUS_rhineland_for_gratitude }
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_state_core = 3
+			add_state_core = 151
+			add_state_core = 870
+			add_state_core = 858
+			add_state_core = 894
+			add_state_core = 939
+			FRA = {
+				add_state_core = 882
+			}
+			create_wargoal = {
+				target = SWI
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = LIE
+				type = annex_everything
+			}
+		}
+	}
+	focus = {
+		id = AUS_return_to_sudetenland
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_rhineland_for_gratitude
+		prerequisite = { focus = AUS_rhineland_for_gratitude }
+		x = 1
+		y = 1
+		cost = 4 
+		completion_reward = {
+			SDT = { make_every_core_national_for_PREV = yes }
+			create_wargoal = {
+				type = annex_everything
+				target = CZE
+			}
+		}
+	}
+	focus = {
+		id = AUS_bohemian_protectorate
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_return_to_sudetenland
+		prerequisite = { focus = AUS_return_to_sudetenland }
+		available = { 
+			owns_state = 1212
+			owns_state = 9
+			owns_state = 75
+			owns_state = 1214
+		}
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			CZE = {
+				set_state_controller = 1212
+				set_state_controller = 1214
+				set_state_controller = 9
+				set_state_controller = 75
+				set_state_owner = 1214
+				set_state_owner = 1212
+				set_state_owner = 75
+				set_state_owner = 9
+				set_cosmetic_tag = CZE_heimwehr_puppet
+				set_politics = {
+					ruling_party = reactionism 
+				}
+				set_party_name = {
+					ideology = reactionism
+					long_name = CZE_heimwehr_party_long
+					name = CZE_heimwehr_party
+				}
+			}
+			diplomatic_relation = {
+				country = CZE
+				relation = puppet
+				active = yes
+			}
+		}
+	}
+	focus = {
+		id = AUS_black_spot_in_mitteleuropa
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_restore_contact_with_french
+		prerequisite = { focus = AUS_restore_contact_with_french }
+		mutually_exclusive = { focus = AUS_frankish_treaty }
+		x = 2
+		y = 1
+		cost = 1
+		completion_reward = { add_ideas = AUS_austrian_neutrality }
+	}
+	focus = {
+		id = AUS_eternal_neutrality
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_black_spot_in_mitteleuropa
+		prerequisite = { focus = AUS_black_spot_in_mitteleuropa }
+		x = 0
+		y = 1
+		cost = 4
+		completion_reward = { 
+			add_war_support = -0.3
+			add_stability = 0.1
+		}
+	}
+####################### STEIDLE PATH #################################################
+
+	focus = {
+		id = AUS_steidle_victory
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_new_leader_of_heimwehr
+		prerequisite = { focus = AUS_new_leader_of_heimwehr }
+		allow_branch = {
+			has_country_leader = { 
+				character = AUS_steidle
+				ruling_only = yes
+			}
+		}
+		x = 0
+		y = 1
+		cost = 2
+		completion_reward = {
+			activate_advisor = AUS_nidlef_dm
+			activate_advisor = AUS_kammerhofer_sm
+			activate_advisor = AUS_fey_em
+			activate_advisor = AUS_starhemberg_hog
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = AUS_counter_german_sentiment
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_steidle_victory
+		prerequisite = {
+			focus = AUS_steidle_victory
+		}
+		x = -3
+		y = 1
+		cost = 2
+		completion_reward = {
+			add_stability = 0.03
+			add_war_support = 0.02
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = AUS_deal_with_spann
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_steidle_victory
+		prerequisite = {
+			focus = AUS_steidle_victory
+		}
+		x = 3
+		y = 1
+		cost = 2
+		completion_reward = {
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_to_variable = {
+				var = debt_level
+				value = 7
+				tooltip = change_debt_tt
+			}
+			add_political_power = 45
+		}
+	}
+	focus = {
+		id = AUS_establish_political_office
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_steidle_victory
+		prerequisite = {
+			focus = AUS_steidle_victory
+		}
+		x = 0
+		y = 1
+		cost = 2
+		completion_reward = {
+			add_political_power = 55
+			add_stability = 0.03
+		}
+	}
+	focus = {
+		id = AUS_new_heimatfront
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_establish_political_office
+		prerequisite = {
+			focus = AUS_establish_political_office
+		}
+		x = -1
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.07
+			}
+			set_temp_variable = { coalition_partner_var = token:revolutionary_nationalism }
+			add_to_coalition = yes
+		}
+	}
+	focus = {
+		id = AUS_cult_of_the_soldier
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_establish_political_office
+		prerequisite = {
+			focus = AUS_establish_political_office
+		}
+		x = 1
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_ideas = AUS_solider_cult_idea
+			add_manpower = 1200
+			add_war_support = 0.08
+		}
+	}
+	focus = {
+		id = AUS_military_corporatism
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_deal_with_spann
+		prerequisite = {
+			focus = AUS_deal_with_spann
+		}
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_political_power = 55
+		}
+	}
+	focus = {
+		id = AUS_embrace_austrian_identity
+		relative_position_id = AUS_counter_german_sentiment
+		icon = GFX_focus_AUS_placeholder
+		prerequisite = {
+			focus = AUS_counter_german_sentiment
+		}
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_ideas = AUS_austrian_nationalism_idea
+			add_war_support = 0.04
+			add_popularity = {
+				ideology = reactionism
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = AUS_side_by_side_with_axis
+		relative_position_id = AUS_embrace_austrian_identity
+		icon = GFX_focus_AUS_placeholder
+		prerequisite = {
+			focus = AUS_embrace_austrian_identity
+		}
+		prerequisite = {
+			focus = AUS_new_heimatfront
+		}
+		x = 1
+		y = 1
+		cost = 4
+		completion_reward = {
+			FRA = {
+				add_to_faction = AUS
+			}
+			add_ideas = axis_member
+			add_ideas = axis_military_bloc
+		}
+	}
+	focus = {
+		id = AUS_paramilitary_with_a_state
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_military_corporatism
+		prerequisite = {
+			focus = AUS_military_corporatism
+		}
+		prerequisite = {
+			focus = AUS_cult_of_the_soldier
+		}
+		x = -1
+		y = 1
+		cost = 4
+		completion_reward = {
+			add_manpower = 4500
+			add_ideas = AUS_grand_paramilitary
+		}
+	}
+	focus = {
+		id = AUS_vienna_speech
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_paramilitary_with_a_state
+		prerequisite = {
+			focus = AUS_paramilitary_with_a_state
+		}
+		prerequisite = {
+			focus = AUS_side_by_side_with_axis
+		}
+		x = -3
+		y = 1
+		cost = 5
+		completion_reward = {
+			country_event = aus.47
+		}
+	}
+	focus = {
+		id = AUS_dolfuss_takes_charge
+		icon = GFX_focus_AUS_placeholder
+		relative_position_id = AUS_vienna_speech
+		prerequisite = {
+			focus = AUS_vienna_speech
+		}
+		allow_branch = {
+			has_country_leader = {
+				character = AUS_folfuss
+				ruling_only = yes
+			}
+		}
+		x = 0
+		y = 1
+		cost = 3
+		completion_reward = {
+			add_popularity = {
+				ideology = revolutionary_nationalism
+				popularity = 0.3
+			}
+			set_cosmetic_tag = AUS_dolfuss
+		}
+	}
+}
+
+
+	
